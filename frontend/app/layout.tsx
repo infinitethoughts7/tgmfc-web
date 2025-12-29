@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AccessibilityProvider } from "./contexts/AccessibilityContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <AccessibilityProvider>
+          {children}
+          {/* Google Translate Element Container */}
+          <div id="google_translate_element" className="fixed top-4 right-4 z-50 hidden"></div>
+        </AccessibilityProvider>
       </body>
     </html>
   );
