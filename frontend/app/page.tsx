@@ -1,9 +1,9 @@
-
-
+import HeroSection from "./components/sections/HeroSection";
+import Navbar from "./components/NavBar";
 export default function Home(){
   return ( 
-    <div className="flex justify-center items-center h-screen bg-slate-200">
-      <h1 className="text-3xl text-slate-900 font-bold underline">Loan and  Home</h1>
+    <div className="bg-slate-100 h-screen w-screen">
+      <Navbar />
     </div>
   )
-}
+} 
