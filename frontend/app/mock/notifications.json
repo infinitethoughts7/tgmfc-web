@@ -1,0 +1,35 @@
+{
+    "notifications": [
+      {
+        "id": 1,
+        "title": "Establishment of Community Training & Production Centres",
+        "url": "/schemes/community-training"
+      },
+      {
+        "id": 2,
+        "title": "Distribution of Sewing Machines under Indiramma Minority Mahila Shakti Scheme",
+        "url": "/schemes/mahila-shakti"
+      },
+      {
+        "id": 3,
+        "title": "Rehabilitation of Minority Families Residing in Dwelling Units of Musi River Bed",
+        "url": "/schemes/musi-rehabilitation"
+      },
+      {
+        "id": 4,
+        "title": "Pre-Matric Scholarship for Minority Students – 2024-25",
+        "url": "/schemes/pre-matric-scholarship"
+      },
+      {
+        "id": 5,
+        "title": "Post-Matric Scholarship for Minority Students – 2024-25",
+        "url": "/schemes/post-matric-scholarship"
+      },
+      {
+        "id": 6,
+        "title": "Skill Development Training Programme for Minority Youth",
+        "url": "/schemes/skill-development"
+      }
+    ]
+  }
+  

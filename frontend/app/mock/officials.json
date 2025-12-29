@@ -1,0 +1,17 @@
+{
+  "officials":
+   [  {
+    "id": 1,
+    "name": "Sri. A Revanth Reddy",
+    "designation": "Hon’ble Chief Minister",
+    "photo_url": "/logos/CM.png"
+  },
+  {
+    "id": 2,
+    "name": "Sri. Mohammad Azharuddin",
+    "designation": "Hon’ble Minister",
+    "photo_url": "/logos/minister.png"
+  }
+
+]}
+  
