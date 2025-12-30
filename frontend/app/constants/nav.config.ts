@@ -8,6 +8,7 @@ export const NAV_ITEMS = [
     children: [
       { label: "About Ministry", href: "/about/ministry" },
       { label: "List of Chairpersons", href: "/about/chairpersons" },
+      {label: 'Organogram', href: '/about/organogram'},
     ],
   },
 
