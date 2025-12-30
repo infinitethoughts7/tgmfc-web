@@ -50,6 +50,7 @@ export default function ChairpersonsPage() {
                 </tr>
               </thead>
 
+
               {/* Table Body */}
               <tbody>
                 {chairpersonsData.chairpersons.map((chairperson: Chairperson, index) => (
