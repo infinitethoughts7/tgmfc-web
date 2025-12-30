@@ -17,14 +17,14 @@ export default function ImageCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000); // Change image every 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative w-full h-full">
-      <div className="relative h-64 w-full overflow-hidden rounded-lg shadow-lg">
+    <div className="w-full h-full flex flex-col">
+      <div className="relative h-full min-h-[320px] overflow-hidden rounded-lg shadow-lg">
         {images.map((image, index) => (
           <div
             key={index}
@@ -43,15 +43,15 @@ export default function ImageCarousel() {
         ))}
       </div>
 
-      {/* Indicators */}
       <div className="flex justify-center mt-2 space-x-2">
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-2.5 h-2.5 rounded-full transition-colors ${
+            className={`w-2 h-2 rounded-full transition-colors ${
               index === currentIndex ? "bg-green-600" : "bg-gray-300"
             }`}
             onClick={() => setCurrentIndex(index)}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

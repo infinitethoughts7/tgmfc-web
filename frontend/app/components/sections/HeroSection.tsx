@@ -3,7 +3,6 @@ import notificationsData from "../../mock/notifications.json";
 import OfficialCard from "../OfficialCard";
 import officialsData from "../../mock/officials.json";
 import ImageCarousel from "../ImageCarousel";
-import Image from "next/image";
 
 type Official = {
   id: number;
@@ -14,31 +13,27 @@ type Official = {
 
 export default function HeroSection() {
   return (
-    <div className="max-w-7xl mx-auto mt-4">
-      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] gap-4">
-        
-        {/* Left Column: Officials Cards */}
-        <div className="w-full h-full flex flex-col">
-          <div className="space-y-4 h-full">
+    <div className="w-full">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] gap-0">
+          
+          <div className="w-full h-[320px] flex flex-col space-y-2 p-2">
             {officialsData.officials.map((official: Official) => (
               <OfficialCard key={official.id} official={official} />
             ))}
           </div>
-        </div>
 
-        {/* Middle Column: Image Carousel */}
-        <div className="w-full flex items-start">
-          <ImageCarousel />
-        </div>
+          <div className="w-full h-[320px]">
+            <ImageCarousel />
+          </div>
 
-        {/* Right Column: Notifications */}
-        <div className="w-full h-full flex flex-col">
-          <div className="h-full">
+          <div className="w-full h-[320px] p-2">
             <Notifications notifications={notificationsData.notifications} />
           </div>
+          
         </div>
-
       </div>
+
     </div>
   );
 }

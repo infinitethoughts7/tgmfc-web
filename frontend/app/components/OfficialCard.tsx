@@ -8,10 +8,10 @@ type Official = {
 
 export default function OfficialCard({ official }: { official: Official }) {
   return (
-    <div className="w-60 rounded-xl bg-green-50 p-3 shadow-md border border-green-200">
+    <div className="w-60 rounded-xl p-3 ">
 
       {/* Photo */}
-      <div className="relative mx-auto h-32 w-32 rounded-lg border-2 border-green-500 bg-white p-1">
+      <div className="relative mx-auto h-32 w-32 rounded-lg border-2 border-green-500 bg-green-50 p-1">
         <Image
           src={official.photo_url}
           alt={official.name}

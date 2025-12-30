@@ -1,0 +1,34 @@
+{
+    "chairpersons": [
+      {
+        "id": 1,
+        "name": "Janab Md. Faheemuddin Qureshi",
+        "designation": "President & Vice Chairman, TGMREIS"
+      },
+      {
+        "id": 2,
+        "name": "Janab Taher Bin Hamdan",
+        "designation": "President, Telangana Urdu Academy"
+      },
+      {
+        "id": 3,
+        "name": "Janab Syed Afzal Biyabani Khusro Pasha",
+        "designation": "Chairman, Telangana Haj Committee"
+      },
+      {
+        "id": 4,
+        "name": "Janab Syed Azmathullah Hussaini",
+        "designation": "Chairman, Telangana Waqf Board"
+      },
+      {
+        "id": 5,
+        "name": "Janab Mohammed Obaidullah Kotwal",
+        "designation": "Chairman, Telangana Minorities Finance Corp."
+      },
+      {
+        "id": 6,
+        "name": "Mr. Deepak John Kokkadan",
+        "designation": "Chairman, Telangana Christian Minorities Finance Corp."
+      }
+    ]
+  }

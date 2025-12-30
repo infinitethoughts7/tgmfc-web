@@ -1,0 +1,77 @@
+{
+    "departments": [
+      {
+        "id": 1,
+        "name": "Telangana Minorities Residential Educational Institutions Society (TGMREIS)",
+        "slug": "tgmreis" ,
+        "logos": "/logos/tgmries_logo.png"
+      },
+      {
+        "id": 2,
+        "name": "Telangana Minority Finance Corporation",
+        "slug": "minority-finance-corporation" ,
+        "logos": "/logos/Finance.png"
+      },
+      {
+        "id": 3,
+        "name": "Telangana State Waqf Board",
+        "slug": "waqf-board" ,
+        "logos": "/logos/telangana.png"
+      },
+      {
+        "id": 4,
+        "name": "Telangana Christian Minority Finance Corporation",
+        "slug": "christian-minority-finance-corporation" ,
+        "logos": "/logos/telangana.png"
+      },
+      {
+        "id": 5,
+        "name": "Survey Commissioner of Waqf",
+        "slug": "survey-commissioner-waqf" ,
+        "logos": "/logos/telangana.png"
+      },
+      {
+        "id": 6,
+        "name": "Waqf Tribunal",
+        "slug": "waqf-tribunal" ,
+        "logos": "/logos/telangana.png"
+      },
+      {
+        "id": 7,
+        "name": "Telangana Haj Committee",
+        "slug": "haj-committee" ,
+        "logos": "/logos/telangana.png"
+      },    
+      {
+        "id": 8,
+        "name": "Telangana Urdu Academy",
+        "slug": "urdu-academy" ,
+        "logos": "/logos/telangana.png"
+      },
+      {
+        "id": 9,
+        "name": "Minorities Study Circle",
+        "slug": "minorities-study-circle" ,
+        "logos": "/logos/telangana.png"
+      },        
+      {
+        "id": 10,
+        "name": "Centre for Education Development of Minorities",
+        "slug": "cedm" ,
+        "logos": "/logos/telangana.png"
+      },
+      {
+        "id": 11,
+        "name": "Dairatul-Maarif-il-Osmania",
+        "slug": "dairatul-maarif" ,
+        "logos": "/logos/telangana.png"
+      },
+      {
+        "id": 12,
+        "name": "Telangana Minorities Commission",
+        "slug": "minorities-commission" ,
+        "logos": "/logos/telangana.png"
+      }
+    ]
+  }
+  
