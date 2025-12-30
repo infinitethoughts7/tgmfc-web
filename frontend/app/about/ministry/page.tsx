@@ -5,7 +5,7 @@ export default function MinistryPage() {
           {/* Page Header */}
           <div className="mb-10">
             <h1 className="text-5xl font-bold text-teal-800 mb-4">
-              OVERVIEW
+              ABOUT THE MINISTRY
             </h1>
             <div className="w-24 h-1.5 bg-green-600"></div>
           </div>
