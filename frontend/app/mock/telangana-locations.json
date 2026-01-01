@@ -1,0 +1,163 @@
+{
+    "districts": [
+      {
+        "id": "hyderabad",
+        "name": "Hyderabad",
+        "mandals": [
+          { "id": "amberpet", "name": "Amberpet" },
+          { "id": "ameerpet", "name": "Ameerpet" },
+          { "id": "asifnagar", "name": "Asif Nagar" },
+          { "id": "bahadurpura", "name": "Bahadurpura" },
+          { "id": "bandlaguda", "name": "Bandlaguda" },
+          { "id": "charminar", "name": "Charminar" },
+          { "id": "golconda", "name": "Golconda" },
+          { "id": "himayatnagar", "name": "Himayat Nagar" },
+          { "id": "khairatabad", "name": "Khairatabad" },
+          { "id": "musheerabad", "name": "Musheerabad" },
+          { "id": "nampally", "name": "Nampally" },
+          { "id": "secunderabad", "name": "Secunderabad" },
+          { "id": "serilingampally", "name": "Serilingampally" },
+          { "id": "shaikpet", "name": "Shaikpet" }
+        ]
+      },
+      {
+        "id": "rangareddy",
+        "name": "Ranga Reddy",
+        "mandals": [
+          { "id": "chevella", "name": "Chevella" },
+          { "id": "hayathnagar", "name": "Hayathnagar" },
+          { "id": "ibrahimpatnam", "name": "Ibrahimpatnam" },
+          { "id": "kandukur", "name": "Kandukur" },
+          { "id": "maheshwaram", "name": "Maheshwaram" },
+          { "id": "moinabad", "name": "Moinabad" },
+          { "id": "rajendranagar", "name": "Rajendranagar" },
+          { "id": "shamshabad", "name": "Shamshabad" },
+          { "id": "shadnagar", "name": "Shadnagar" },
+          { "id": "yacharam", "name": "Yacharam" }
+        ]
+      },
+      {
+        "id": "medchal",
+        "name": "Medchal-Malkajgiri",
+        "mandals": [
+          { "id": "alwal", "name": "Alwal" },
+          { "id": "dundigal", "name": "Dundigal" },
+          { "id": "ghatkesar", "name": "Ghatkesar" },
+          { "id": "kapra", "name": "Kapra" },
+          { "id": "keesara", "name": "Keesara" },
+          { "id": "kompally", "name": "Kompally" },
+          { "id": "medchal", "name": "Medchal" },
+          { "id": "quthbullapur", "name": "Quthbullapur" },
+          { "id": "shamirpet", "name": "Shamirpet" },
+          { "id": "uppal", "name": "Uppal" }
+        ]
+      },
+      {
+        "id": "sangareddy",
+        "name": "Sangareddy",
+        "mandals": [
+          { "id": "ameenpur", "name": "Ameenpur" },
+          { "id": "jharasangam", "name": "Jharasangam" },
+          { "id": "kandi", "name": "Kandi" },
+          { "id": "narayankhed", "name": "Narayankhed" },
+          { "id": "patancheru", "name": "Patancheru" },
+          { "id": "sangareddy", "name": "Sangareddy" },
+          { "id": "sadasivpet", "name": "Sadasivpet" },
+          { "id": "zaheerabad", "name": "Zaheerabad" }
+        ]
+      },
+      {
+        "id": "nizamabad",
+        "name": "Nizamabad",
+        "mandals": [
+          { "id": "armoor", "name": "Armoor" },
+          { "id": "balkonda", "name": "Balkonda" },
+          { "id": "bodhan", "name": "Bodhan" },
+          { "id": "dichpally", "name": "Dichpally" },
+          { "id": "kamareddy", "name": "Kamareddy" },
+          { "id": "nizamabad-north", "name": "Nizamabad North" },
+          { "id": "nizamabad-south", "name": "Nizamabad South" },
+          { "id": "yellareddy", "name": "Yellareddy" }
+        ]
+      },
+      {
+        "id": "warangal",
+        "name": "Warangal",
+        "mandals": [
+          { "id": "dharmasagar", "name": "Dharmasagar" },
+          { "id": "hanamkonda", "name": "Hanamkonda" },
+          { "id": "hasanparthy", "name": "Hasanparthy" },
+          { "id": "kazipet", "name": "Kazipet" },
+          { "id": "narsampet", "name": "Narsampet" },
+          { "id": "parkal", "name": "Parkal" },
+          { "id": "warangal", "name": "Warangal" }
+        ]
+      },
+      {
+        "id": "karimnagar",
+        "name": "Karimnagar",
+        "mandals": [
+          { "id": "choppadandi", "name": "Choppadandi" },
+          { "id": "gangadhara", "name": "Gangadhara" },
+          { "id": "huzurabad", "name": "Huzurabad" },
+          { "id": "karimnagar", "name": "Karimnagar" },
+          { "id": "kothapally", "name": "Kothapally" },
+          { "id": "manakondur", "name": "Manakondur" },
+          { "id": "sircilla", "name": "Sircilla" }
+        ]
+      },
+      {
+        "id": "khammam",
+        "name": "Khammam",
+        "mandals": [
+          { "id": "bhadrachalam", "name": "Bhadrachalam" },
+          { "id": "kallur", "name": "Kallur" },
+          { "id": "khammam-rural", "name": "Khammam Rural" },
+          { "id": "khammam-urban", "name": "Khammam Urban" },
+          { "id": "kothagudem", "name": "Kothagudem" },
+          { "id": "madhira", "name": "Madhira" },
+          { "id": "sathupally", "name": "Sathupally" },
+          { "id": "wyra", "name": "Wyra" }
+        ]
+      },
+      {
+        "id": "nalgonda",
+        "name": "Nalgonda",
+        "mandals": [
+          { "id": "bhongir", "name": "Bhongir" },
+          { "id": "choutuppal", "name": "Choutuppal" },
+          { "id": "devarakonda", "name": "Devarakonda" },
+          { "id": "miryalaguda", "name": "Miryalaguda" },
+          { "id": "nalgonda", "name": "Nalgonda" },
+          { "id": "nakrekal", "name": "Nakrekal" },
+          { "id": "suryapet", "name": "Suryapet" }
+        ]
+      },
+      {
+        "id": "mahabubnagar",
+        "name": "Mahabubnagar",
+        "mandals": [
+          { "id": "achampet", "name": "Achampet" },
+          { "id": "alampur", "name": "Alampur" },
+          { "id": "gadwal", "name": "Gadwal" },
+          { "id": "jadcherla", "name": "Jadcherla" },
+          { "id": "kollapur", "name": "Kollapur" },
+          { "id": "mahabubnagar", "name": "Mahabubnagar" },
+          { "id": "nagarkurnool", "name": "Nagarkurnool" },
+          { "id": "wanaparthy", "name": "Wanaparthy" }
+        ]
+      },
+      {
+        "id": "adilabad",
+        "name": "Adilabad",
+        "mandals": [
+          { "id": "adilabad-rural", "name": "Adilabad Rural" },
+          { "id": "adilabad-urban", "name": "Adilabad Urban" },
+          { "id": "asifabad", "name": "Asifabad" },
+          { "id": "mancherial", "name": "Mancherial" },
+          { "id": "nirmal", "name": "Nirmal" },
+          { "id": "utnoor", "name": "Utnoor" }
+        ]
+      }
+    ]
+  }

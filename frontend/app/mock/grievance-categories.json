@@ -1,0 +1,116 @@
+{
+  "categories": [
+    {
+      "id": "scholarship-financial-aid",
+      "title": "Scholarship & Financial Aid",
+      "department_id": "minority-finance-corporation",
+      "icon": "graduation-cap",
+      "subcategories": [
+        {
+          "id": "post-matric-scholarships",
+          "title": "Post Matric Scholarships (MTF)",
+          "scheme_code": "MTF",
+          "form_template": "scholarship-form"
+        },
+        {
+          "id": "tuition-fee-reimbursement",
+          "title": "Re-imbursement of Tuition Fees (RTF)",
+          "scheme_code": "RTF",
+          "form_template": "scholarship-form"
+        },
+        {
+          "id": "overseas-scholarship",
+          "title": "Chief Minister's Overseas Scholarship",
+          "scheme_code": "CMOS",
+          "form_template": "overseas-scholarship-form"
+        }
+      ]
+    },
+    {
+      "id": "residential-education",
+      "title": "Residential Education Services",
+      "department_id": "tgmreis",
+      "icon": "school",
+      "subcategories": [
+        {
+          "id": "diet-quality",
+          "title": "Diet Quality",
+          "scheme_code": "RES-DIET",
+          "form_template": "residential-form"
+        },
+        {
+          "id": "uniforms-materials",
+          "title": "Uniforms/Materials",
+          "scheme_code": "RES-UNI",
+          "form_template": "residential-form"
+        },
+        {
+          "id": "building-maintenance",
+          "title": "Building Maintenance",
+          "scheme_code": "RES-BLD",
+          "form_template": "residential-form"
+        }
+      ]
+    },
+    {
+      "id": "economic-support",
+      "title": "Economic Support Units",
+      "department_id": "minority-finance-corporation",
+      "icon": "banknote",
+      "subcategories": [
+        {
+          "id": "bank-linked-subsidies",
+          "title": "Bank-linked Subsidies",
+          "scheme_code": "ECO-BLS",
+          "form_template": "economic-form"
+        },
+        {
+          "id": "rajiv-yuva-vikasam",
+          "title": "Rajiv Yuva Vikasam",
+          "scheme_code": "RYV",
+          "form_template": "economic-form"
+        }
+      ]
+    },
+    {
+      "id": "institutional-documentation",
+      "title": "Institutional Documentation",
+      "department_id": "waqf-board",
+      "icon": "file-text",
+      "subcategories": [
+        {
+          "id": "marriage-certificates",
+          "title": "Marriage Certificates",
+          "scheme_code": "DOC-MAR",
+          "form_template": "documentation-form"
+        },
+        {
+          "id": "waqf-property",
+          "title": "Waqf Property",
+          "scheme_code": "DOC-WQF",
+          "form_template": "waqf-form"
+        }
+      ]
+    },
+    {
+      "id": "scheme-related",
+      "title": "Scheme Related Grievance",
+      "department_id": "minorities-welfare",
+      "icon": "clipboard-list",
+      "subcategories": [
+        {
+          "id": "shaadi-mubarak",
+          "title": "Shaadi Mubarak",
+          "scheme_code": "SM",
+          "form_template": "shaadi-mubarak-form"
+        },
+        {
+          "id": "rajiv-gruha-kalpa",
+          "title": "Rajiv Gruha Kalpa",
+          "scheme_code": "RGK",
+          "form_template": "housing-form"
+        }
+      ]
+    }
+  ]
+}

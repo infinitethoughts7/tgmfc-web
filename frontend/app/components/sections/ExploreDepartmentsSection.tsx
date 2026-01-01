@@ -1,5 +1,5 @@
 import DepartmentCard from "../DepartmentCard";
-import departmentsData from "../../mock/department_names.json";
+import departmentsData from "../../mock/department-names.json";
 
 type Department = {
   id: number;

@@ -1,0 +1,376 @@
+{
+  "form_templates": {
+    "shaadi-mubarak-form": {
+      "id": "shaadi-mubarak-form",
+      "title": "Shaadi Mubarak",
+      "description": "You are Registering Grievance regarding Shaadi Mubarak",
+      "fields": [
+        {
+          "id": "name_as_per_ssc",
+          "label": "Name as per SSC",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter name as per SSC certificate"
+        },
+        {
+          "id": "spouse_name",
+          "label": "Spouse Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter spouse name"
+        },
+        {
+          "id": "date_of_marriage",
+          "label": "Date of Marriage",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "district",
+          "label": "District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        },
+        {
+          "id": "mandal",
+          "label": "Mandal",
+          "type": "select",
+          "required": true,
+          "options_source": "mandals",
+          "depends_on": "district"
+        },
+        {
+          "id": "annual_income",
+          "label": "Annual Income",
+          "type": "number",
+          "required": true,
+          "placeholder": "Enter annual income in INR"
+        }
+      ]
+    },
+    "scholarship-form": {
+      "id": "scholarship-form",
+      "title": "Scholarship Grievance",
+      "description": "You are Registering Grievance regarding Scholarship",
+      "fields": [
+        {
+          "id": "institution_name",
+          "label": "Institution Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter your institution name"
+        },
+        {
+          "id": "course_name",
+          "label": "Course Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter your course name"
+        },
+        {
+          "id": "year_of_study",
+          "label": "Year of Study",
+          "type": "select",
+          "required": true,
+          "options": ["1st Year", "2nd Year", "3rd Year", "4th Year", "5th Year"]
+        },
+        {
+          "id": "scholarship_id",
+          "label": "Scholarship Application ID",
+          "type": "text",
+          "required": false,
+          "placeholder": "Enter if already applied"
+        },
+        {
+          "id": "district",
+          "label": "District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        },
+        {
+          "id": "annual_income",
+          "label": "Annual Family Income",
+          "type": "number",
+          "required": true,
+          "placeholder": "Enter annual income in INR"
+        }
+      ]
+    },
+    "residential-form": {
+      "id": "residential-form",
+      "title": "Residential School Grievance",
+      "description": "You are Registering Grievance regarding Residential Education Services",
+      "fields": [
+        {
+          "id": "school_name",
+          "label": "School Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter school name"
+        },
+        {
+          "id": "school_code",
+          "label": "School Code",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter TGMREIS school code"
+        },
+        {
+          "id": "class",
+          "label": "Class",
+          "type": "select",
+          "required": true,
+          "options": ["5th", "6th", "7th", "8th", "9th", "10th", "Intermediate 1st Year", "Intermediate 2nd Year"]
+        },
+        {
+          "id": "district",
+          "label": "District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        },
+        {
+          "id": "hostel_name",
+          "label": "Hostel Name",
+          "type": "text",
+          "required": false,
+          "placeholder": "Enter hostel name if applicable"
+        }
+      ]
+    },
+    "economic-form": {
+      "id": "economic-form",
+      "title": "Economic Support Grievance",
+      "description": "You are Registering Grievance regarding Economic Support",
+      "fields": [
+        {
+          "id": "business_type",
+          "label": "Business Type",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter type of business/occupation"
+        },
+        {
+          "id": "loan_application_id",
+          "label": "Loan Application ID",
+          "type": "text",
+          "required": false,
+          "placeholder": "Enter if already applied"
+        },
+        {
+          "id": "bank_name",
+          "label": "Bank Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter bank name"
+        },
+        {
+          "id": "district",
+          "label": "District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        },
+        {
+          "id": "mandal",
+          "label": "Mandal",
+          "type": "select",
+          "required": true,
+          "options_source": "mandals",
+          "depends_on": "district"
+        },
+        {
+          "id": "annual_income",
+          "label": "Annual Income",
+          "type": "number",
+          "required": true,
+          "placeholder": "Enter annual income in INR"
+        }
+      ]
+    },
+    "documentation-form": {
+      "id": "documentation-form",
+      "title": "Documentation Grievance",
+      "description": "You are Registering Grievance regarding Documentation",
+      "fields": [
+        {
+          "id": "document_type",
+          "label": "Document Type Required",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter document type"
+        },
+        {
+          "id": "application_date",
+          "label": "Application Date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "id": "reference_number",
+          "label": "Reference Number",
+          "type": "text",
+          "required": false,
+          "placeholder": "Enter if available"
+        },
+        {
+          "id": "district",
+          "label": "District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        }
+      ]
+    },
+    "waqf-form": {
+      "id": "waqf-form",
+      "title": "Waqf Property Grievance",
+      "description": "You are Registering Grievance regarding Waqf Property",
+      "fields": [
+        {
+          "id": "property_type",
+          "label": "Property Type",
+          "type": "select",
+          "required": true,
+          "options": ["Land", "Building", "Shop", "Other"]
+        },
+        {
+          "id": "survey_number",
+          "label": "Survey Number",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter survey number"
+        },
+        {
+          "id": "waqf_registration_number",
+          "label": "Waqf Registration Number",
+          "type": "text",
+          "required": false,
+          "placeholder": "Enter if available"
+        },
+        {
+          "id": "district",
+          "label": "District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        },
+        {
+          "id": "mandal",
+          "label": "Mandal",
+          "type": "select",
+          "required": true,
+          "options_source": "mandals",
+          "depends_on": "district"
+        },
+        {
+          "id": "village",
+          "label": "Village",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter village name"
+        }
+      ]
+    },
+    "housing-form": {
+      "id": "housing-form",
+      "title": "Rajiv Gruha Kalpa Grievance",
+      "description": "You are Registering Grievance regarding Rajiv Gruha Kalpa",
+      "fields": [
+        {
+          "id": "application_id",
+          "label": "Application ID",
+          "type": "text",
+          "required": false,
+          "placeholder": "Enter if already applied"
+        },
+        {
+          "id": "housing_type",
+          "label": "Housing Type",
+          "type": "select",
+          "required": true,
+          "options": ["New Construction", "Renovation", "Land Purchase"]
+        },
+        {
+          "id": "district",
+          "label": "District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        },
+        {
+          "id": "mandal",
+          "label": "Mandal",
+          "type": "select",
+          "required": true,
+          "options_source": "mandals",
+          "depends_on": "district"
+        },
+        {
+          "id": "annual_income",
+          "label": "Annual Income",
+          "type": "number",
+          "required": true,
+          "placeholder": "Enter annual income in INR"
+        },
+        {
+          "id": "land_owned",
+          "label": "Do you own land?",
+          "type": "select",
+          "required": true,
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    "overseas-scholarship-form": {
+      "id": "overseas-scholarship-form",
+      "title": "Overseas Scholarship Grievance",
+      "description": "You are Registering Grievance regarding Chief Minister's Overseas Scholarship",
+      "fields": [
+        {
+          "id": "university_name",
+          "label": "University Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter foreign university name"
+        },
+        {
+          "id": "country",
+          "label": "Country",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter country"
+        },
+        {
+          "id": "course_name",
+          "label": "Course Name",
+          "type": "text",
+          "required": true,
+          "placeholder": "Enter course name"
+        },
+        {
+          "id": "admission_letter_date",
+          "label": "Admission Letter Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "scholarship_application_id",
+          "label": "Scholarship Application ID",
+          "type": "text",
+          "required": false,
+          "placeholder": "Enter if already applied"
+        },
+        {
+          "id": "district",
+          "label": "Home District",
+          "type": "select",
+          "required": true,
+          "options_source": "districts"
+        }
+      ]
+    }
+  }
+}
