@@ -105,7 +105,7 @@ export default function SchemeDetailsForm({
   };
 
   const renderField = (field: FormField) => {
-    const commonClasses = `w-full px-4 py-3 rounded-lg border ${
+    const commonClasses = `w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
       errors[field.id] ? "border-red-500" : "border-gray-200"
     } focus:outline-none focus:ring-2 focus:ring-green-500`;
 
@@ -121,7 +121,7 @@ export default function SchemeDetailsForm({
             value={formData[field.id] || ""}
             onChange={(e) => handleChange(field.id, e.target.value)}
             disabled={isDisabled}
-            className={`${commonClasses} bg-white disabled:bg-gray-100 disabled:cursor-not-allowed`}
+            className={`${commonClasses} disabled:bg-gray-100 disabled:cursor-not-allowed`}
           >
             <option value="">
               {isDisabled
@@ -200,18 +200,18 @@ export default function SchemeDetailsForm({
   }
 
   return (
-    <div className="bg-green-100 rounded-xl p-8 max-w-lg mx-auto">
-      <h2 className="text-xl font-bold text-gray-800 mb-2">
+    <div className="bg-green-100 rounded-xl p-6 max-w-lg mx-auto">
+      <h2 className="text-xl font-bold text-gray-800 mb-1">
         You are Registering Grievance regarding {schemeTitle}
       </h2>
-      <p className="text-gray-600 mb-6 text-sm">{template.description}</p>
+      <p className="text-gray-600 mb-4 text-sm">{template.description}</p>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-3">
         {fields.map((field) => (
           <div key={field.id}>
             <label
               htmlFor={field.id}
-              className="block text-sm font-semibold text-gray-700 mb-2"
+              className="block text-sm font-semibold text-gray-700 mb-1"
             >
               {field.label}
               {field.required && <span className="text-red-500 ml-1">*</span>}
@@ -224,7 +224,7 @@ export default function SchemeDetailsForm({
         ))}
 
         {/* Buttons */}
-        <div className="flex gap-4 pt-4">
+        <div className="flex gap-4 pt-2">
           <button
             type="button"
             onClick={onBack}

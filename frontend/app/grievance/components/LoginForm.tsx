@@ -52,16 +52,16 @@ export default function LoginForm({ initialData, onNext, onBack }: LoginFormProp
 
   return (
     <div className="bg-green-100 rounded-xl p-8 max-w-md mx-auto">
-      <h2 className="text-xl font-bold text-gray-800 mb-6">Create Login</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-4">Create Login</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-3">
         {/* Email/Phone Field */}
         <div>
           <label
             htmlFor="emailOrPhone"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
-            Email / Phone Number
+            Aadhaar/ Phone Number
           </label>
           <input
             type="text"
@@ -70,7 +70,7 @@ export default function LoginForm({ initialData, onNext, onBack }: LoginFormProp
             onChange={(e) =>
               setFormData({ ...formData, emailOrPhone: e.target.value })
             }
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.emailOrPhone ? "border-red-500" : "border-gray-200"
             } focus:outline-none focus:ring-2 focus:ring-green-500`}
             placeholder="Enter email or phone number"
@@ -87,7 +87,7 @@ export default function LoginForm({ initialData, onNext, onBack }: LoginFormProp
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
             Name
           </label>
@@ -96,7 +96,7 @@ export default function LoginForm({ initialData, onNext, onBack }: LoginFormProp
             id="name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.name ? "border-red-500" : "border-gray-200"
             } focus:outline-none focus:ring-2 focus:ring-green-500`}
             placeholder="Enter your name"
@@ -110,7 +110,7 @@ export default function LoginForm({ initialData, onNext, onBack }: LoginFormProp
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4 pt-4">
+        <div className="flex gap-4 pt-2">
           <button
             type="button"
             onClick={onBack}

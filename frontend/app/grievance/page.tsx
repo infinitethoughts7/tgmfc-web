@@ -175,45 +175,6 @@ export default function GrievancePage() {
             )}
           </div>
         </div>
-
-        {/* Contact Section */}
-        <div className="mt-12 bg-gray-100 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Contact Us</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <p className="font-medium text-gray-800">Ministry of Minority Affairs</p>
-              <p className="text-gray-600 text-sm mt-1">tsmfcinfo@gmail.com</p>
-              <p className="text-gray-600 text-sm">
-                1-53, Lakdika pool, Hyderabad
-                <br />
-                Telangana, 500087
-              </p>
-            </div>
-            <div>
-              <p className="font-medium text-gray-800">Social Network</p>
-              <div className="mt-1 space-y-1 text-sm">
-                <a
-                  href="https://twitter.com/minority-affairs"
-                  className="block text-green-600 hover:underline"
-                >
-                  Twitter: @Minority-Affairs-Official
-                </a>
-                <a
-                  href="https://instagram.com/minority-affairs"
-                  className="block text-green-600 hover:underline"
-                >
-                  Instagram: @Minority-Affairs-Official
-                </a>
-                <a
-                  href="https://facebook.com/minority-affairs"
-                  className="block text-green-600 hover:underline"
-                >
-                  Facebook: Minority-Affairs-Official
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

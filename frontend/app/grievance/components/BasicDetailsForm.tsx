@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import locationsData from "../../mock/telangana-locations.json";
 
 type BasicDetails = {
@@ -34,23 +34,11 @@ export default function BasicDetailsForm({
     }
   );
   const [errors, setErrors] = useState<Partial<BasicDetails>>({});
-  const [mandals, setMandals] = useState<{ id: string; name: string }[]>([]);
 
-  // Update mandals when district changes
-  useEffect(() => {
-    if (formData.district) {
-      const selectedDistrict = locationsData.districts.find(
-        (d) => d.id === formData.district
-      );
-      setMandals(selectedDistrict?.mandals || []);
-      // Reset mandal if district changed
-      if (initialData?.district !== formData.district) {
-        setFormData((prev) => ({ ...prev, mandal: "" }));
-      }
-    } else {
-      setMandals([]);
-    }
-  }, [formData.district, initialData?.district]);
+  // Derive mandals from selected district
+  const mandals = formData.district
+    ? locationsData.districts.find((d) => d.id === formData.district)?.mandals || []
+    : [];
 
   const validateForm = (): boolean => {
     const newErrors: Partial<BasicDetails> = {};
@@ -93,17 +81,17 @@ export default function BasicDetailsForm({
   };
 
   return (
-    <div className="bg-green-100 rounded-xl p-8 max-w-lg mx-auto">
-      <h2 className="text-xl font-bold text-gray-800 mb-6">
+    <div className="bg-green-100 rounded-xl p-6 max-w-lg mx-auto">
+      <h2 className="text-xl font-bold text-gray-800 mb-4">
         Enter your Basic Details
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-3">
         {/* Name as per Aadhaar */}
         <div>
           <label
             htmlFor="nameAsPerAadhaar"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
             Name as Per Aadhaar Card
           </label>
@@ -114,7 +102,7 @@ export default function BasicDetailsForm({
             onChange={(e) =>
               setFormData({ ...formData, nameAsPerAadhaar: e.target.value })
             }
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.nameAsPerAadhaar ? "border-red-500" : "border-gray-200"
             } focus:outline-none focus:ring-2 focus:ring-green-500`}
             placeholder="Enter name as per Aadhaar"
@@ -128,7 +116,7 @@ export default function BasicDetailsForm({
         <div>
           <label
             htmlFor="dob"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
             DOB
           </label>
@@ -137,7 +125,7 @@ export default function BasicDetailsForm({
             id="dob"
             value={formData.dob}
             onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.dob ? "border-red-500" : "border-gray-200"
             } focus:outline-none focus:ring-2 focus:ring-green-500`}
           />
@@ -150,7 +138,7 @@ export default function BasicDetailsForm({
         <div>
           <label
             htmlFor="fatherName"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
             Father&apos;s Name
           </label>
@@ -161,7 +149,7 @@ export default function BasicDetailsForm({
             onChange={(e) =>
               setFormData({ ...formData, fatherName: e.target.value })
             }
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.fatherName ? "border-red-500" : "border-gray-200"
             } focus:outline-none focus:ring-2 focus:ring-green-500`}
             placeholder="Enter father's name"
@@ -175,19 +163,20 @@ export default function BasicDetailsForm({
         <div>
           <label
             htmlFor="district"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
             District
           </label>
           <select
             id="district"
             value={formData.district}
-            onChange={(e) =>
-              setFormData({ ...formData, district: e.target.value })
-            }
-            className={`w-full px-4 py-3 rounded-lg border ${
+            onChange={(e) => {
+              const newDistrict = e.target.value;
+              setFormData({ ...formData, district: newDistrict, mandal: "" });
+            }}
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.district ? "border-red-500" : "border-gray-200"
-            } focus:outline-none focus:ring-2 focus:ring-green-500 bg-white`}
+            } focus:outline-none focus:ring-2 focus:ring-green-500`}
           >
             <option value="">Select District</option>
             {locationsData.districts.map((district) => (
@@ -205,7 +194,7 @@ export default function BasicDetailsForm({
         <div>
           <label
             htmlFor="mandal"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
             Mandal
           </label>
@@ -216,9 +205,9 @@ export default function BasicDetailsForm({
               setFormData({ ...formData, mandal: e.target.value })
             }
             disabled={!formData.district}
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.mandal ? "border-red-500" : "border-gray-200"
-            } focus:outline-none focus:ring-2 focus:ring-green-500 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed`}
+            } focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100 disabled:cursor-not-allowed`}
           >
             <option value="">
               {formData.district ? "Select Mandal" : "Select District first"}
@@ -238,7 +227,7 @@ export default function BasicDetailsForm({
         <div>
           <label
             htmlFor="completeAddress"
-            className="block text-sm font-semibold text-gray-700 mb-2"
+            className="block text-sm font-semibold text-gray-700 mb-1"
           >
             Complete Address
           </label>
@@ -249,7 +238,7 @@ export default function BasicDetailsForm({
               setFormData({ ...formData, completeAddress: e.target.value })
             }
             rows={3}
-            className={`w-full px-4 py-3 rounded-lg border ${
+            className={`w-full px-4 py-2 rounded-lg border bg-white text-gray-900 ${
               errors.completeAddress ? "border-red-500" : "border-gray-200"
             } focus:outline-none focus:ring-2 focus:ring-green-500 resize-none`}
             placeholder="Enter complete address"
@@ -260,7 +249,7 @@ export default function BasicDetailsForm({
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4 pt-4">
+        <div className="flex gap-4 pt-2">
           <button
             type="button"
             onClick={onBack}

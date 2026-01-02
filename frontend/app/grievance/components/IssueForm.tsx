@@ -125,15 +125,15 @@ export default function IssueForm({
   };
 
   return (
-    <div className="bg-green-100 rounded-xl p-8 max-w-lg mx-auto">
-      <h2 className="text-xl font-bold text-gray-800 mb-2">
+    <div className="bg-green-100 rounded-xl p-6 max-w-lg mx-auto">
+      <h2 className="text-xl font-bold text-gray-800 mb-1">
         You are Registering Grievance regarding {schemeTitle}
       </h2>
-      <p className="text-gray-600 mb-6 text-sm">
+      <p className="text-gray-600 mb-4 text-sm">
         Please write or Record your issue below {MAX_WORDS} words
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Issue Description */}
         <div>
           <div className="relative">
@@ -142,7 +142,7 @@ export default function IssueForm({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={8}
-              className={`w-full px-4 py-3 rounded-lg border ${
+              className={`w-full px-4 py-3 rounded-lg border bg-white text-gray-900 ${
                 errors.description ? "border-red-500" : "border-gray-200"
               } focus:outline-none focus:ring-2 focus:ring-green-500 resize-none`}
               placeholder="Describe your grievance in detail..."
@@ -261,7 +261,7 @@ export default function IssueForm({
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4 pt-4">
+        <div className="flex gap-4 pt-2">
           <button
             type="button"
             onClick={onBack}
