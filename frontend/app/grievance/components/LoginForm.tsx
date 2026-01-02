@@ -133,7 +133,7 @@ export default function LoginForm({ initialData, onNext, onBack }: LoginFormProp
               htmlFor="emailOrPhone"
               className="block text-sm font-semibold text-gray-800 mb-1"
             >
-              Email / Phone Number
+              Aadhaar/ Phone Number
             </label>
             <input
               type="text"
