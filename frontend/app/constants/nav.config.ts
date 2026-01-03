@@ -65,9 +65,9 @@ export const NAV_ITEMS = [
       },
     ],
   },
+  {label:'Reports', href: '/reports'},
   { label: "File & Manage Grievance", href: "/grievance" },
   {label:'Photo gallery', href: '/photo-gallery'},
   { label: "Achievements", href: "/achievements" },
-  { label: "Reports", href: "/reports" },
   { label: "Budget", href: "/budget" },
 ];

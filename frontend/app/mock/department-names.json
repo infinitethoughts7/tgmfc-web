@@ -10,13 +10,13 @@
         "id": 2,
         "name": "Telangana Minority Finance Corporation",
         "slug": "minority-finance-corporation" ,
-        "logos": "/logos/tmfc.png"
+        "logos": "/logos/mfc.png"
       },
       {
         "id": 3,
         "name": "Telangana State Waqf Board",
         "slug": "waqf-board" ,
-        "logos": "/logos/telangana.png"
+        "logos": "/logos/waqf-board.png"
       },
       {
         "id": 4,
