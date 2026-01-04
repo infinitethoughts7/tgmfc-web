@@ -1,14 +1,31 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { NAV_ITEMS } from "@/app/constants/nav.config";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Check if a nav item is active
+  const isActive = (href?: string) => {
+    if (!href) return false;
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
+
+  // Check if any child in dropdown is active
+  const hasActiveChild = (children?: Array<{ href: string }>) => {
+    if (!children) return false;
+    return children.some(child => isActive(child.href));
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -23,8 +40,20 @@ export default function Navbar() {
     };
   }, []);
 
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Make navbar sticky when scrolled past a certain point
+      setIsSticky(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="w-full border-b bg-white">
+    <header className={`${isSticky ? 'sticky top-0 shadow-md' : 'relative'} z-50 w-full border-b bg-white transition-all duration-300`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
 
         {/* Desktop Navigation */}
@@ -34,7 +63,11 @@ export default function Navbar() {
               {!item.children ? (
                 <Link
                   href={item.href!}
-                  className="rounded px-3 py-2 font-semibold text-black transition-all duration-200 hover:bg-green-600 hover:text-white hover:scale-105"
+                  className={`rounded px-3 py-2 font-semibold transition-all duration-200 hover:bg-green-600 hover:text-white hover:scale-105 ${
+                    isActive(item.href) 
+                      ? "bg-green-500 text-white scale-105" 
+                      : "text-black"
+                  }`}
                 >
                   {item.label}
                 </Link>
@@ -48,8 +81,8 @@ export default function Navbar() {
                     }
                     className={`flex items-center gap-1 rounded px-3 py-2 font-semibold transition-all duration-200
                       ${
-                        openDropdown === item.label
-                          ? "bg-green-600 text-white scale-105"
+                        openDropdown === item.label || hasActiveChild(item.children)
+                          ? "bg-green-500 text-white scale-105"
                           : "text-black hover:bg-green-600 hover:text-white hover:scale-105"
                       }`}
                     aria-haspopup="true"
@@ -83,7 +116,11 @@ export default function Navbar() {
                           <Link
                             key={child.label}
                             href={child.href}
-                            className={`block px-4 py-3 text-sm font-medium text-black hover:bg-green-100 hover:text-green-800 ${
+                            className={`block px-4 py-3 text-sm font-medium ${
+                              isActive(child.href)
+                                ? "bg-green-500 text-white"
+                                : "text-black hover:bg-green-100 hover:text-green-800"
+                            } ${
                               index !== item.children!.length - 1 ? 'border-b border-gray-100' : ''
                             }`}
                             onClick={() => setOpenDropdown(null)}
@@ -119,14 +156,22 @@ export default function Navbar() {
                 {!item.children ? (
                   <Link
                     href={item.href!}
-                    className="block rounded px-3 py-2 font-semibold text-black hover:bg-green-600 hover:text-white transition"
+                    className={`block rounded px-3 py-2 font-semibold transition ${
+                      isActive(item.href)
+                        ? "bg-green-500 text-white"
+                        : "text-black hover:bg-green-600 hover:text-white"
+                    }`}
                     onClick={() => setMobileOpen(false)}
                   >
                     {item.label}
                   </Link>
                 ) : (
                   <details className="group">
-                    <summary className="flex cursor-pointer items-center justify-between rounded px-3 py-2 font-semibold hover:bg-green-600 hover:text-white transition">
+                    <summary className={`flex cursor-pointer items-center justify-between rounded px-3 py-2 font-semibold transition ${
+                      hasActiveChild(item.children)
+                        ? "bg-green-500 text-white"
+                        : "hover:bg-green-600 hover:text-white"
+                    }`}>
                       {item.label}
                       <ChevronDown className="h-4 w-4 group-open:rotate-180 transition-transform" />
                     </summary>
@@ -146,7 +191,11 @@ export default function Navbar() {
                           ) : (
                             <Link
                               href={child.href}
-                              className="block rounded px-2 py-1 text-sm text-black hover:bg-green-100"
+                              className={`block rounded px-2 py-1 text-sm ${
+                                isActive(child.href)
+                                  ? "bg-green-500 text-white"
+                                  : "text-black hover:bg-green-100"
+                              }`}
                               onClick={() => setMobileOpen(false)}
                             >
                               {child.label}

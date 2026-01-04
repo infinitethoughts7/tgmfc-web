@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import { Menu, Search, Plus, Minus, RotateCcw, Languages, Volume2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAccessibility } from "../../contexts/AccessibilityContext";
 
 export default function TopHeader() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const {
     fontSize,
     increaseFontSize,
@@ -16,8 +18,31 @@ export default function TopHeader() {
     toggleScreenReader,
     toggleTranslate
   } = useAccessibility();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Hide when scrolling up, show when at top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <div className="w-full border-b bg-white">
+    <div className={`w-full border-b bg-white transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         
         {/* Left: Logo + Ministry Name */}

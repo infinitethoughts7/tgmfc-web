@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AccessibilityProvider } from "./contexts/AccessibilityContext";
 import Footer from "./components/Footer";
+import TopHeader from "./components/sections/TopHeader";
+import NavBar from "./components/sections/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +33,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AccessibilityProvider>
-          {/* Main Content Area - Each page renders here (includes TopHeader + NavBar from page) */}
+          {/* TopHeader - Available on all pages with scroll behavior */}
+          <TopHeader />
+          
+          {/* NavBar - Available on all pages, becomes sticky on scroll */}
+          <NavBar />
+          
+          {/* Main Content Area - Each page renders here */}
           <main className="min-h-screen">
             {children}
           </main>
