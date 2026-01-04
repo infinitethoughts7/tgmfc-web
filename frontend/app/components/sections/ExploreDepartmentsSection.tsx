@@ -6,7 +6,7 @@ type Department = {
   name: string;
   slug: string;
   logos: string;
-  externalLink?: string;
+  externalLink?: string | null;
 };
 
 export default function ExploreDepartmentsSection() {
