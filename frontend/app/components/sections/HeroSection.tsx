@@ -14,6 +14,7 @@ export default function HeroSection() {
   return (
     <div className="w-full py-2">
       <div className="max-w-7xl mx-auto px-4">
+
         {/* Mobile Layout */}
         <div className="lg:hidden flex flex-col gap-3">
           {/* Officials - Horizontal on mobile */}

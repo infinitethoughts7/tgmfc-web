@@ -1,14 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { Menu, Search, Plus, Minus, RotateCcw, Languages, Volume2 } from "lucide-react";
+import { Menu, Search, Plus, Minus, RotateCcw, Languages, Volume2, VolumeX } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useAccessibility } from "../../contexts/AccessibilityContext";
+import { useAccessibility, Language } from "../../contexts/AccessibilityContext";
 
 export default function TopHeader() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const {
     fontSize,
     increaseFontSize,
@@ -16,8 +18,29 @@ export default function TopHeader() {
     resetFontSize,
     isScreenReaderActive,
     toggleScreenReader,
-    toggleTranslate
+    currentLanguage,
+    setLanguage,
+    isReading,
+    stopReading,
+    readText
   } = useAccessibility();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const languageLabels: Record<Language, { name: string; nativeName: string }> = {
+    en: { name: 'English', nativeName: 'English' },
+    ur: { name: 'Urdu', nativeName: 'اردو' },
+    te: { name: 'Telugu', nativeName: 'తెలుగు' }
+  };
+
+  const handleReadPage = () => {
+    // Get the main content of the page (you can customize this selector)
+    const mainContent = document.querySelector('main') || document.body;
+    const text = mainContent?.textContent?.slice(0, 500) || 'No content to read';
+    readText(text, currentLanguage);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +65,7 @@ export default function TopHeader() {
   }, [lastScrollY]);
 
   return (
-    <div className={`w-full border-b bg-white transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <div className={`w-full border-b bg-white transition-transform duration-300 relative z-[60] ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="mx-auto max-w-7xl px-4 py-3">
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center justify-between">
@@ -96,14 +119,60 @@ export default function TopHeader() {
                 </button>
               </div>
 
-              <button onClick={toggleTranslate} className="flex items-center gap-1 rounded p-1 hover:bg-green-100" aria-label="Translate website" title="Translate website">
-                <Languages className="h-4 w-4 text-green-700" />
-                <span className="text-xs text-green-700">اردو</span>
-              </button>
+              <div className="relative z-[100]">
+                <button
+                  onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                  className="flex items-center gap-1 rounded px-2 py-1 hover:bg-green-100 bg-white border border-green-300"
+                  aria-label="Select language"
+                  title="Select language"
+                >
+                  <Languages className="h-4 w-4 text-green-700" />
+                  <span className="text-xs font-semibold text-green-700">
+                    {mounted ? languageLabels[currentLanguage].nativeName : 'English'}
+                  </span>
+                </button>
 
-              <button onClick={toggleScreenReader} className={`rounded p-1 hover:bg-green-100 ${isScreenReaderActive ? 'bg-green-200' : ''}`} aria-label={isScreenReaderActive ? "Disable screen reader" : "Enable screen reader"} title={isScreenReaderActive ? "Disable screen reader" : "Enable screen reader"}>
-                <Volume2 className={`h-4 w-4 ${isScreenReaderActive ? 'text-green-800' : 'text-green-700'}`} />
-              </button>
+                {showLanguageMenu && (
+                  <div className="absolute right-0 top-full mt-2 bg-white border-2 border-green-500 rounded-md shadow-2xl z-[200] min-w-[140px]">
+                    {(['en', 'ur', 'te'] as Language[]).map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang);
+                          setShowLanguageMenu(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 text-base font-medium transition-colors ${
+                          currentLanguage === lang
+                            ? 'bg-green-600 text-white font-bold'
+                            : 'bg-white text-gray-800 hover:bg-green-100'
+                        } first:rounded-t-md last:rounded-b-md border-b border-gray-200 last:border-b-0`}
+                      >
+                        {languageLabels[lang].nativeName}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {isReading ? (
+                <button
+                  onClick={stopReading}
+                  className="rounded p-1 hover:bg-green-100 bg-red-100"
+                  aria-label="Stop reading"
+                  title="Stop reading"
+                >
+                  <VolumeX className="h-4 w-4 text-red-700" />
+                </button>
+              ) : (
+                <button
+                  onClick={handleReadPage}
+                  className="rounded p-1 hover:bg-green-100"
+                  aria-label="Read page content"
+                  title="Read page content"
+                >
+                  <Volume2 className="h-4 w-4 text-green-700" />
+                </button>
+              )}
             </div>
 
             <button className="rounded p-2 hover:bg-green-100" aria-label="Open sidebar">
@@ -144,12 +213,47 @@ export default function TopHeader() {
               <button onClick={increaseFontSize} className="rounded p-1 hover:bg-green-100" aria-label="Increase font size">
                 <Plus className="h-4 w-4 text-green-700" />
               </button>
-              <button onClick={toggleTranslate} className="rounded p-1 hover:bg-green-100" aria-label="Translate website">
-                <Languages className="h-4 w-4 text-green-700" />
-              </button>
-              <button onClick={toggleScreenReader} className={`rounded p-1 hover:bg-green-100 ${isScreenReaderActive ? 'bg-green-200' : ''}`} aria-label="Toggle screen reader">
-                <Volume2 className={`h-4 w-4 ${isScreenReaderActive ? 'text-green-800' : 'text-green-700'}`} />
-              </button>
+
+              <div className="relative z-[100]">
+                <button
+                  onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                  className="flex items-center gap-1 rounded p-1 hover:bg-green-100 bg-white border border-green-300"
+                  aria-label="Select language"
+                >
+                  <Languages className="h-4 w-4 text-green-700" />
+                </button>
+
+                {showLanguageMenu && (
+                  <div className="absolute right-0 top-full mt-2 bg-white border-2 border-green-500 rounded-md shadow-2xl z-[200] min-w-[120px]">
+                    {(['en', 'ur', 'te'] as Language[]).map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang);
+                          setShowLanguageMenu(false);
+                        }}
+                        className={`w-full text-left px-3 py-2.5 text-sm font-medium transition-colors ${
+                          currentLanguage === lang
+                            ? 'bg-green-600 text-white font-bold'
+                            : 'bg-white text-gray-800 hover:bg-green-100'
+                        } first:rounded-t-md last:rounded-b-md border-b border-gray-200 last:border-b-0`}
+                      >
+                        {languageLabels[lang].nativeName}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {isReading ? (
+                <button onClick={stopReading} className="rounded p-1 hover:bg-green-100 bg-red-100" aria-label="Stop reading">
+                  <VolumeX className="h-4 w-4 text-red-700" />
+                </button>
+              ) : (
+                <button onClick={handleReadPage} className="rounded p-1 hover:bg-green-100" aria-label="Read page content">
+                  <Volume2 className="h-4 w-4 text-green-700" />
+                </button>
+              )}
             </div>
           </div>
 
