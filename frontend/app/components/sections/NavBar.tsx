@@ -139,11 +139,11 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden"
+          className="md:hidden p-2 rounded hover:bg-green-100"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X /> : <Menu />}
+          {mobileOpen ? <X className="h-6 w-6 text-green-700" /> : <Menu className="h-6 w-6 text-green-700" />}
         </button>
       </div>
 
@@ -159,7 +159,7 @@ export default function Navbar() {
                     className={`block rounded px-3 py-2 font-semibold transition ${
                       isActive(item.href)
                         ? "bg-green-500 text-white"
-                        : "text-black hover:bg-green-600 hover:text-white"
+                        : "text-green-800 hover:bg-green-600 hover:text-white"
                     }`}
                     onClick={() => setMobileOpen(false)}
                   >
@@ -170,10 +170,10 @@ export default function Navbar() {
                     <summary className={`flex cursor-pointer items-center justify-between rounded px-3 py-2 font-semibold transition ${
                       hasActiveChild(item.children)
                         ? "bg-green-500 text-white"
-                        : "hover:bg-green-600 hover:text-white"
+                        : "text-green-800 hover:bg-green-600 hover:text-white"
                     }`}>
                       {item.label}
-                      <ChevronDown className="h-4 w-4 group-open:rotate-180 transition-transform" />
+                      <ChevronDown className="h-4 w-4 text-green-600 group-open:rotate-180 transition-transform" />
                     </summary>
                     <ul className="ml-3 mt-1 space-y-1">
                       {item.children.map((child) => (
@@ -183,10 +183,10 @@ export default function Navbar() {
                               href={child.externalLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="block rounded px-2 py-1 text-sm text-black hover:bg-green-100"
+                              className="block rounded px-2 py-1 text-sm text-green-700 hover:bg-green-100 hover:text-green-900"
                               onClick={() => setMobileOpen(false)}
                             >
-                              {child.label} <span className="text-xs">→</span>
+                              {child.label} <span className="text-xs text-green-500">→</span>
                             </a>
                           ) : (
                             <Link
@@ -194,7 +194,7 @@ export default function Navbar() {
                               className={`block rounded px-2 py-1 text-sm ${
                                 isActive(child.href)
                                   ? "bg-green-500 text-white"
-                                  : "text-black hover:bg-green-100"
+                                  : "text-green-700 hover:bg-green-100 hover:text-green-900"
                               }`}
                               onClick={() => setMobileOpen(false)}
                             >
