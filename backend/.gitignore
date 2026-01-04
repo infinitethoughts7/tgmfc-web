@@ -34,3 +34,7 @@ Thumbs.db
 
 # Wagtail
 *.pyc
+
+
+#commads  
+backend/cms/management/commands/populate_gallery.py

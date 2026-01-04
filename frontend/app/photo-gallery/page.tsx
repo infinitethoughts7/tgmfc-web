@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import galleryData from "../mock/photo-gallery.json";
+import { getGalleryImages, getGalleryCategories } from "../lib/api";
 
 type GalleryItem = {
   id: number;
@@ -12,14 +12,47 @@ type GalleryItem = {
   category: string;
 };
 
+type Category = {
+  id: string;
+  label: string;
+};
+
 export default function PhotoGalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+  const [gallery, setGallery] = useState<GalleryItem[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [imagesData, categoriesData] = await Promise.all([
+          getGalleryImages(),
+          getGalleryCategories(),
+        ]);
+        
+        setGallery(imagesData.gallery || []);
+        // Add "All" category at the beginning
+        setCategories([
+          { id: "all", label: "All" },
+          ...(categoriesData.categories || []),
+        ]);
+        setLoading(false);
+      } catch {
+        setError("Failed to load gallery");
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const filteredImages =
     selectedCategory === "all"
-      ? galleryData.gallery
-      : galleryData.gallery.filter((item) => item.category === selectedCategory);
+      ? gallery
+      : gallery.filter((item) => item.category === selectedCategory);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-IN", {
@@ -28,6 +61,22 @@ export default function PhotoGalleryPage() {
       year: "numeric",
     });
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-gray-500">Loading gallery...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-red-500">{error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -40,7 +89,7 @@ export default function PhotoGalleryPage() {
 
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 mb-8">
-          {galleryData.categories.map((cat) => (
+          {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
@@ -75,13 +124,13 @@ export default function PhotoGalleryPage() {
 
               {/* Caption */}
               <div className="mt-2">
-                    <p className="text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-green-700 transition-colors">
-                        {item.title}
-                    </p>
-                    <p className="text-xs text-green-600 font-medium mt-1">
-                        {formatDate(item.date)}
-                    </p>
-                </div>
+                <p className="text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-green-700 transition-colors">
+                  {item.title}
+                </p>
+                <p className="text-xs text-green-600 font-medium mt-1">
+                  {formatDate(item.date)}
+                </p>
+              </div>
             </div>
           ))}
         </div>

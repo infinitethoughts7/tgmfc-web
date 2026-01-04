@@ -52,7 +52,7 @@ def gallery_images_list(request):
         "gallery": [
             {
                 "id": img.id,
-                "image": img.image.file.url if img.image else None,
+                "image": request.build_absolute_uri(img.image.file.url) if img.image else None,
                 "title": img.title,
                 "date": img.date.isoformat(),
                 "category": img.category.slug if img.category else None,
