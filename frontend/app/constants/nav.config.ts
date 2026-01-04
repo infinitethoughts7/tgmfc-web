@@ -1,6 +1,18 @@
 // app/constants/nav.config.ts
 
-export const NAV_ITEMS = [
+type NavChild = {
+  label: string;
+  href: string;
+  externalLink?: string;
+};
+
+type NavItem = {
+  label: string;
+  href?: string;
+  children?: NavChild[];
+};
+
+export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
 
   {
@@ -8,7 +20,7 @@ export const NAV_ITEMS = [
     children: [
       { label: "About Ministry", href: "/about/ministry" },
       { label: "List of Chairpersons", href: "/about/chairpersons" },
-      {label: 'Organogram', href: '/about/organogram'},
+      { label: "Organogram", href: "/about/organogram" },
     ],
   },
 
@@ -18,18 +30,22 @@ export const NAV_ITEMS = [
       {
         label: "TGMREIS",
         href: "/departments/tgmreis",
+        externalLink: "https://tgmreistelangana.cgg.gov.in",
       },
       {
         label: "Telangana Minority Finance Corporation",
         href: "/departments/minority-finance-corporation",
+        externalLink: "https://tgmfc.com/",
       },
       {
         label: "Telangana Christian Minority Finance Corporation",
         href: "/departments/christian-minority-finance-corporation",
+        externalLink: "https://tgcmfc.in/",
       },
       {
         label: "Telangana State Waqf Board",
         href: "/departments/waqf-board",
+        externalLink: "https://waqf.telangana.gov.in/",
       },
       {
         label: "Survey Commissioner of Waqf",
@@ -38,22 +54,27 @@ export const NAV_ITEMS = [
       {
         label: "Waqf Tribunal",
         href: "/departments/waqf-tribunal",
+        externalLink: "https://waqf.telangana.gov.in/",
       },
       {
         label: "Telangana Haj Committee",
         href: "/departments/haj-committee",
+        externalLink: "https://telanganastatehajcommittee.com/",
       },
       {
         label: "Telangana Urdu Academy",
         href: "/departments/urdu-academy",
+        externalLink: "https://www.urduacademyts.com/",
       },
       {
         label: "Minorities Study Circle",
         href: "/departments/minorities-study-circle",
+        externalLink: "https://tsstudycircle.co.in/",
       },
       {
         label: "Centre for Education Development of Minorities",
         href: "/departments/cedm",
+        externalLink: "https://tscedm.com/",
       },
       {
         label: "Dairatul-Maarif-il-Osmania",
@@ -65,9 +86,9 @@ export const NAV_ITEMS = [
       },
     ],
   },
-  {label:'Reports', href: '/reports'},
+  { label: "Reports", href: "/reports" },
   { label: "File & Manage Grievance", href: "/grievance" },
-  {label:'Photo gallery', href: '/photo-gallery'},
+  { label: "Photo Gallery", href: "/photo-gallery" },
   { label: "Achievements", href: "/achievements" },
   { label: "Budget", href: "/budget" },
 ];

@@ -10,7 +10,6 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -27,15 +26,11 @@ export default function Navbar() {
   return (
     <header className="w-full border-b bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
-  
 
         {/* Desktop Navigation */}
         <nav ref={dropdownRef} className="hidden md:flex items-center gap-2">
           {NAV_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className="relative"
-            >
+            <div key={item.label} className="relative">
               {!item.children ? (
                 <Link
                   href={item.href!}
@@ -70,18 +65,33 @@ export default function Navbar() {
 
                   {openDropdown === item.label && (
                     <div className="absolute left-0 top-full z-50 mt-2 w-56 rounded-md bg-white shadow-lg border border-gray-200">
-                      {item.children.map((child, index) => (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          className={`block px-4 py-3 text-sm font-medium text-black hover:bg-green-100 hover:text-green-800 ${
-                            index !== item.children.length - 1 ? 'border-b border-gray-100' : ''
-                          }`}
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+                      {item.children.map((child, index) =>
+                        child.externalLink ? (
+                          <a
+                            key={child.label}
+                            href={child.externalLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`block px-4 py-3 text-sm font-medium text-black hover:bg-green-100 hover:text-green-800 ${
+                              index !== item.children!.length - 1 ? 'border-b border-gray-100' : ''
+                            }`}
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            {child.label} <span className="text-xs">→</span>
+                          </a>
+                        ) : (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            className={`block px-4 py-3 text-sm font-medium text-black hover:bg-green-100 hover:text-green-800 ${
+                              index !== item.children!.length - 1 ? 'border-b border-gray-100' : ''
+                            }`}
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            {child.label}
+                          </Link>
+                        )
+                      )}
                     </div>
                   )}
                 </>
@@ -89,7 +99,6 @@ export default function Navbar() {
             </div>
           ))}
         </nav>
-
 
         {/* Mobile Toggle */}
         <button
@@ -104,7 +113,6 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden border-t bg-white px-4 py-3">
-
           <ul className="space-y-1">
             {NAV_ITEMS.map((item) => (
               <li key={item.label}>
@@ -125,13 +133,25 @@ export default function Navbar() {
                     <ul className="ml-3 mt-1 space-y-1">
                       {item.children.map((child) => (
                         <li key={child.label}>
-                          <Link
-                            href={child.href}
-                            className="block rounded px-2 py-1 text-sm text-black hover:bg-green-100"
-                            onClick={() => setMobileOpen(false)}
-                          >
-                            {child.label}
-                          </Link>
+                          {child.externalLink ? (
+                            <a
+                              href={child.externalLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block rounded px-2 py-1 text-sm text-black hover:bg-green-100"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              {child.label} <span className="text-xs">→</span>
+                            </a>
+                          ) : (
+                            <Link
+                              href={child.href}
+                              className="block rounded px-2 py-1 text-sm text-black hover:bg-green-100"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              {child.label}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
