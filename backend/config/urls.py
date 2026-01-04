@@ -6,13 +6,31 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from search import views as search_views
+from search import views as search_views 
+
+from cms.api import (
+    api_router, 
+    notifications_list,
+    gallery_categories_list,
+    gallery_images_list,
+)
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
+
+    # Wagtail API (pages, images, documents)
+    path("api/v2/", api_router.urls),
+
+    # Our custom Snippet APIs
+    path("api/v2/notifications/", notifications_list, name="notifications-list"),
+    path("api/v2/gallery/categories/", gallery_categories_list, name="gallery-categories"),
+    path("api/v2/gallery/images/", gallery_images_list, name="gallery-images"),
+
+    # Wagtail catch-all (keep at bottom)
+    path("", include(wagtail_urls)),
 ]
 
 

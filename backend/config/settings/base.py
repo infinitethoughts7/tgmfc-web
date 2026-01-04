@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     "home",
     "search",
     "cms",
+    "wagtail.api.v2",
+    "rest_framework",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",

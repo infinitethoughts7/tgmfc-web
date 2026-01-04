@@ -167,7 +167,7 @@ export default function GrievanceRegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="mb-6">

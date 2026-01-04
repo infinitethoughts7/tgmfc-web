@@ -19,98 +19,45 @@ type GrievanceStatus = {
 };
 
 export default function TrackGrievancePage() {
+  const [searchMethod, setSearchMethod] = useState<"tracking" | "aadhaar">("tracking");
+  const [trackingId, setTrackingId] = useState("");
   const [aadhaarNumber, setAadhaarNumber] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
-  const [otp, setOtp] = useState("");
-  const [otpSent, setOtpSent] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [isSendingOtp, setIsSendingOtp] = useState(false);
-  const [resendTimer, setResendTimer] = useState(0);
   const [error, setError] = useState("");
   const [result, setResult] = useState<GrievanceStatus | null>(null);
 
-  const validateInputs = (): boolean => {
-    if (!aadhaarNumber.trim() || aadhaarNumber.length !== 12) {
-      setError("Please enter a valid 12-digit Aadhaar number");
-      return false;
-    }
-    if (!mobileNumber.trim() || mobileNumber.length !== 10) {
-      setError("Please enter a valid 10-digit mobile number");
-      return false;
-    }
-    return true;
-  };
-
-  const startResendTimer = () => {
-    setResendTimer(30);
-    const interval = setInterval(() => {
-      setResendTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-  };
-
-  const handleSendOtp = async () => {
-    setError("");
-    if (!validateInputs()) return;
-
-    setIsSendingOtp(true);
-    try {
-      // TODO: Replace with actual API call to send OTP
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("OTP sent to:", mobileNumber);
-      setOtpSent(true);
-      startResendTimer();
-    } catch (err) {
-      setError("Failed to send OTP. Please try again.");
-    } finally {
-      setIsSendingOtp(false);
-    }
-  };
-
-  const handleResendOtp = async () => {
-    if (resendTimer > 0) return;
-
-    setIsSendingOtp(true);
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("OTP resent to:", mobileNumber);
-      startResendTimer();
-    } catch (err) {
-      setError("Failed to resend OTP.");
-    } finally {
-      setIsSendingOtp(false);
-    }
-  };
-
-  const handleEditDetails = () => {
-    setOtpSent(false);
-    setOtp("");
-    setError("");
-    setResult(null);
-  };
-
-  const handleVerifyAndSearch = async (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setResult(null);
 
-    if (otp.length !== 6) {
-      setError("Please enter 6-digit OTP");
+    // Validation
+    if (searchMethod === "tracking" && !trackingId.trim()) {
+      setError("Please enter your Tracking ID");
       return;
     }
 
+    if (searchMethod === "aadhaar") {
+      if (!aadhaarNumber.trim() || aadhaarNumber.length !== 12) {
+        setError("Please enter a valid 12-digit Aadhaar number");
+        return;
+      }
+      if (!mobileNumber.trim() || mobileNumber.length !== 10) {
+        setError("Please enter a valid 10-digit mobile number");
+        return;
+      }
+    }
+
     setIsSearching(true);
+
     try {
-      // TODO: Replace with actual API call to verify OTP and fetch grievance
+      // TODO: Replace with actual API call to Wagtail CMS
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // Mock result
+      // Mock result for demonstration
       const mockResult: GrievanceStatus = {
-        trackingId: "GRV-LXY123-AB45",
+        trackingId: trackingId || "GRV-LXY123-AB45",
         schemeName: "Shaadi Mubarak",
         status: "in_progress",
         submittedAt: "2025-12-25T10:30:00.000Z",
@@ -137,7 +84,7 @@ export default function TrackGrievancePage() {
 
       setResult(mockResult);
     } catch (err) {
-      setError("No grievance found or invalid OTP. Please try again.");
+      setError("No grievance found with the provided details. Please check and try again.");
     } finally {
       setIsSearching(false);
     }
@@ -173,9 +120,9 @@ export default function TrackGrievancePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-3xl mx-auto px-4 py-6">
+      <div className="max-w-3xl mx-auto px-4 py-8">
         {/* Page Header */}
-        <div className="mb-6">
+        <div className="mb-8">
           <h1 className="text-3xl font-bold text-teal-800 mb-2">
             Track Your Grievance
           </h1>
@@ -185,157 +132,110 @@ export default function TrackGrievancePage() {
         </div>
 
         {/* Search Form */}
-        <div className="bg-green-100 rounded-xl px-10 py-6 mb-6">
-          {!otpSent ? (
-            // Step 1: Enter Aadhaar + Mobile
-            <form onSubmit={(e) => { e.preventDefault(); handleSendOtp(); }} className="space-y-4">
-              <div>
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          {/* Search Method Toggle */}
+          <div className="flex gap-4 mb-6">
+            <button
+              onClick={() => setSearchMethod("tracking")}
+              className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                searchMethod === "tracking"
+                  ? "bg-green-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              By Tracking ID
+            </button>
+            <button
+              onClick={() => setSearchMethod("aadhaar")}
+              className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                searchMethod === "aadhaar"
+                  ? "bg-green-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              By Aadhaar + Mobile
+            </button>
+          </div>
+
+          <form onSubmit={handleSearch}>
+            {searchMethod === "tracking" ? (
+              <div className="mb-4">
                 <label
-                  htmlFor="aadhaar"
-                  className="block text-sm font-semibold text-gray-800 mb-1"
+                  htmlFor="trackingId"
+                  className="block text-sm font-semibold text-gray-700 mb-2"
                 >
-                  Aadhaar Number
+                  Tracking ID
                 </label>
                 <input
                   type="text"
-                  id="aadhaar"
-                  value={aadhaarNumber}
-                  onChange={(e) => {
-                    const val = e.target.value.replace(/\D/g, "").slice(0, 12);
-                    setAadhaarNumber(val);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="Enter 12-digit Aadhaar number"
+                  id="trackingId"
+                  value={trackingId}
+                  onChange={(e) => setTrackingId(e.target.value.toUpperCase())}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 font-mono"
+                  placeholder="e.g., GRV-LXY123-AB45"
                 />
               </div>
-
-              <div>
-                <label
-                  htmlFor="mobile"
-                  className="block text-sm font-semibold text-gray-800 mb-1"
-                >
-                  Registered Mobile Number
-                </label>
-                <input
-                  type="text"
-                  id="mobile"
-                  value={mobileNumber}
-                  onChange={(e) => {
-                    const val = e.target.value.replace(/\D/g, "").slice(0, 10);
-                    setMobileNumber(val);
-                  }}
-                  className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="Enter 10-digit mobile number"
-                />
-              </div>
-
-              {error && <p className="text-red-600 text-sm">{error}</p>}
-
-              <button
-                type="submit"
-                disabled={isSendingOtp}
-                className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50"
-              >
-                {isSendingOtp ? "Sending OTP..." : "Send OTP"}
-              </button>
-            </form>
-          ) : !result ? (
-            // Step 2: Enter OTP
-            <form onSubmit={handleVerifyAndSearch} className="space-y-4">
-              {/* Show where OTP was sent */}
-              <div className="bg-white rounded-lg p-3 border border-gray-300">
-                <p className="text-sm text-gray-600">OTP sent to:</p>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="font-semibold text-gray-900">+91 {mobileNumber}</p>
-                  <button
-                    type="button"
-                    onClick={handleEditDetails}
-                    className="text-sm text-green-600 hover:underline"
+            ) : (
+              <div className="space-y-4 mb-4">
+                <div>
+                  <label
+                    htmlFor="aadhaar"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
                   >
-                    Edit
-                  </button>
+                    Aadhaar Number
+                  </label>
+                  <input
+                    type="text"
+                    id="aadhaar"
+                    value={aadhaarNumber}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 12);
+                      setAadhaarNumber(val);
+                    }}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Enter 12-digit Aadhaar number"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="mobile"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
+                    Registered Mobile Number
+                  </label>
+                  <input
+                    type="text"
+                    id="mobile"
+                    value={mobileNumber}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                      setMobileNumber(val);
+                    }}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Enter 10-digit mobile number"
+                  />
                 </div>
               </div>
+            )}
 
-              {/* OTP Input */}
-              <div>
-                <label
-                  htmlFor="otp"
-                  className="block text-sm font-semibold text-gray-800 mb-1"
-                >
-                  Enter OTP
-                </label>
-                <input
-                  type="text"
-                  id="otp"
-                  value={otp}
-                  onChange={(e) => {
-                    const val = e.target.value.replace(/\D/g, "").slice(0, 6);
-                    setOtp(val);
-                    if (error) setError("");
-                  }}
-                  className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 text-center text-2xl font-mono tracking-widest border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-                  placeholder="● ● ● ● ● ●"
-                  maxLength={6}
-                  autoFocus
-                />
-              </div>
+            {error && (
+              <p className="text-red-600 text-sm mb-4">{error}</p>
+            )}
 
-              {/* Resend OTP */}
-              <div className="text-center">
-                {resendTimer > 0 ? (
-                  <p className="text-sm text-gray-600">
-                    Resend OTP in <span className="font-semibold">{resendTimer}s</span>
-                  </p>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={handleResendOtp}
-                    disabled={isSendingOtp}
-                    className="text-sm text-green-600 font-semibold hover:underline disabled:opacity-50"
-                  >
-                    {isSendingOtp ? "Sending..." : "Resend OTP"}
-                  </button>
-                )}
-              </div>
-
-              {error && <p className="text-red-600 text-sm text-center">{error}</p>}
-
-              <div className="flex gap-4 pt-2">
-                <button
-                  type="button"
-                  onClick={handleEditDetails}
-                  className="flex-1 px-6 py-3 rounded-lg border border-gray-400 text-gray-700 font-semibold hover:bg-white transition-colors"
-                >
-                  Back
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSearching || otp.length !== 6}
-                  className="flex-1 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
-                >
-                  <Search className="w-5 h-5" />
-                  {isSearching ? "Searching..." : "Verify & Search"}
-                </button>
-              </div>
-            </form>
-          ) : (
-            // Step 3: Show search again option
-            <div className="text-center">
-              <p className="text-gray-700 mb-3">Showing results for Aadhaar: ****{aadhaarNumber.slice(-4)}</p>
-              <button
-                onClick={handleEditDetails}
-                className="text-green-600 font-semibold hover:underline"
-              >
-                Search Another Grievance
-              </button>
-            </div>
-          )}
+            <button
+              type="submit"
+              disabled={isSearching}
+              className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              <Search className="w-5 h-5" />
+              {isSearching ? "Searching..." : "Search"}
+            </button>
+          </form>
         </div>
 
         {/* Search Result */}
         {result && (
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             {/* Status Header */}
             <div className="bg-green-50 p-6 border-b border-green-100">
               <div className="flex items-start justify-between">
@@ -422,7 +322,7 @@ export default function TrackGrievancePage() {
         )}
 
         {/* Back Link */}
-        <div className="text-center">
+        <div className="mt-8 text-center">
           <Link
             href="/grievance"
             className="text-green-600 font-semibold hover:underline"

@@ -64,7 +64,7 @@ export default function PhotoGalleryPage() {
               onClick={() => setSelectedImage(item)}
             >
               {/* Image Container */}
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+              <div className="relative aspect-4/3 overflow-hidden rounded-lg">
                 <Image
                   src={item.image}
                   alt={item.title}
