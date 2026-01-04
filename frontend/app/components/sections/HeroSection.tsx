@@ -1,5 +1,4 @@
 import Notifications from "../sections/Notifications";
-import notificationsData from "../../mock/notifications.json";
 import OfficialCard from "../OfficialCard";
 import officialsData from "../../mock/officials.json";
 import ImageCarousel from "../ImageCarousel";
@@ -28,7 +27,7 @@ export default function HeroSection() {
           </div>
 
           <div className="w-full h-[320px] p-2">
-            <Notifications notifications={notificationsData.notifications} />
+            <Notifications />
           </div>
           
         </div>
