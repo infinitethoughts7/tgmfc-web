@@ -24,7 +24,7 @@ export default function ImageCarousel() {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="relative h-full min-h-[320px] overflow-hidden rounded-lg shadow-lg">
+      <div className="relative flex-1 overflow-hidden rounded-lg shadow-lg">
         {images.map((image, index) => (
           <div
             key={index}
@@ -41,19 +41,20 @@ export default function ImageCarousel() {
             />
           </div>
         ))}
-      </div>
-
-      <div className="flex justify-center mt-2 space-x-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === currentIndex ? "bg-green-600" : "bg-gray-300"
-            }`}
-            onClick={() => setCurrentIndex(index)}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+        
+        {/* Dots overlay at bottom */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                index === currentIndex ? "bg-green-500" : "bg-white/70"
+              }`}
+              onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

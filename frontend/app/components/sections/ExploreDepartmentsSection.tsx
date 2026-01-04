@@ -16,12 +16,9 @@ export default function ExploreDepartmentsSection() {
         
         {/* Section Header */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+          <h2 className="text-3xl font-bold text-gray-800">
             Explore Our Departments
           </h2>
-          <p className="text-gray-600 text-lg">
-            Discover the various departments and their services
-          </p>
         </div>
 
         {/* Cards Grid */}

@@ -12,27 +12,29 @@ type Official = {
 
 export default function HeroSection() {
   return (
-    <div className="w-full">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] gap-0">
+    <div className="w-full py-2">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[180px_1fr_280px] gap-3 h-[360px]">
           
-          <div className="w-full h-[320px] flex flex-col space-y-2 p-2">
+          {/* Officials - Left Column */}
+          <div className="flex flex-col gap-1">
             {officialsData.officials.map((official: Official) => (
               <OfficialCard key={official.id} official={official} />
             ))}
           </div>
 
-          <div className="w-full h-[320px]">
+          {/* Carousel - Center Column */}
+          <div className="h-full">
             <ImageCarousel />
           </div>
 
-          <div className="w-full h-[320px] p-2">
+          {/* Notifications - Right Column */}
+          <div className="h-full">
             <Notifications />
           </div>
           
         </div>
       </div>
-
     </div>
   );
 }

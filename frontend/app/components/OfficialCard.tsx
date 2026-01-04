@@ -8,10 +8,10 @@ type Official = {
 
 export default function OfficialCard({ official }: { official: Official }) {
   return (
-    <div className="w-60 rounded-xl p-3 ">
+    <div className="flex-1 flex flex-col items-center justify-center rounded-xl p-2 bg-white shadow-sm border border-gray-100">
 
       {/* Photo */}
-      <div className="relative mx-auto h-32 w-32 rounded-lg border-2 border-green-500 bg-green-50 p-1">
+      <div className="relative h-24 w-24 rounded-lg border-2 border-green-500 bg-green-50 p-1">
         <Image
           src={official.photo_url}
           alt={official.name}
@@ -21,7 +21,7 @@ export default function OfficialCard({ official }: { official: Official }) {
       </div>
 
       {/* Name */}
-      <h3 className="mt-2 text-center text-base font-bold text-green-900 leading-tight">
+      <h3 className="mt-1 text-center text-sm font-bold text-green-900 leading-tight">
         {official.name}
       </h3>
 
