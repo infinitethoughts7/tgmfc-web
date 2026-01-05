@@ -1,36 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Clock, CheckCircle, AlertCircle, FileText } from "lucide-react";
+import { Search, Clock, CheckCircle, AlertCircle, FileText, XCircle, AlertTriangle } from "lucide-react";
 import Link from "next/link";
-
-type GrievanceStatus = {
-  trackingId: string;
-  schemeName: string;
-  status: "pending" | "in_progress" | "resolved" | "rejected";
-  submittedAt: string;
-  lastUpdated: string;
-  department: string;
-  timeline: {
-    date: string;
-    status: string;
-    description: string;
-  }[];
-};
+import { GrievanceAPI } from "@/app/lib/api/grievance-service";
+import { Grievance, STATUS_LABELS, STATUS_COLORS } from "@/app/lib/types/grievance";
+import { SCHEMES } from "@/app/lib/mock-data/schemes";
+import GrievanceTimeline from "@/app/officer/components/GrievanceTimeline";
 
 export default function TrackGrievancePage() {
   const [searchMethod, setSearchMethod] = useState<"tracking" | "aadhaar">("tracking");
   const [trackingId, setTrackingId] = useState("");
-  const [aadhaarNumber, setAadhaarNumber] = useState("");
+  const [aadhaarLast4, setAadhaarLast4] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState("");
-  const [result, setResult] = useState<GrievanceStatus | null>(null);
+  const [result, setResult] = useState<Grievance | null>(null);
+  const [multipleResults, setMultipleResults] = useState<Grievance[]>([]);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setResult(null);
+    setMultipleResults([]);
 
     // Validation
     if (searchMethod === "tracking" && !trackingId.trim()) {
@@ -39,8 +31,8 @@ export default function TrackGrievancePage() {
     }
 
     if (searchMethod === "aadhaar") {
-      if (!aadhaarNumber.trim() || aadhaarNumber.length !== 12) {
-        setError("Please enter a valid 12-digit Aadhaar number");
+      if (!aadhaarLast4.trim() || aadhaarLast4.length !== 4) {
+        setError("Please enter the last 4 digits of your Aadhaar number");
         return;
       }
       if (!mobileNumber.trim() || mobileNumber.length !== 10) {
@@ -52,70 +44,40 @@ export default function TrackGrievancePage() {
     setIsSearching(true);
 
     try {
-      // TODO: Replace with actual API call to Wagtail CMS
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Mock result for demonstration
-      const mockResult: GrievanceStatus = {
-        trackingId: trackingId || "GRV-LXY123-AB45",
-        schemeName: "Shaadi Mubarak",
-        status: "in_progress",
-        submittedAt: "2025-12-25T10:30:00.000Z",
-        lastUpdated: "2025-12-28T14:20:00.000Z",
-        department: "Minorities Welfare",
-        timeline: [
-          {
-            date: "2025-12-25T10:30:00.000Z",
-            status: "Submitted",
-            description: "Grievance submitted successfully",
-          },
-          {
-            date: "2025-12-26T09:00:00.000Z",
-            status: "Under Review",
-            description: "Grievance assigned to department officer",
-          },
-          {
-            date: "2025-12-28T14:20:00.000Z",
-            status: "In Progress",
-            description: "Documents being verified",
-          },
-        ],
-      };
-
-      setResult(mockResult);
+      if (searchMethod === "tracking") {
+        const grievance = await GrievanceAPI.trackGrievance(trackingId);
+        if (grievance) {
+          setResult(grievance);
+        } else {
+          setError("No grievance found with this Tracking ID. Please check and try again.");
+        }
+      } else {
+        const grievances = await GrievanceAPI.trackGrievancesByContact(mobileNumber, aadhaarLast4);
+        if (grievances.length === 0) {
+          setError("No grievances found with the provided details. Please check and try again.");
+        } else if (grievances.length === 1) {
+          setResult(grievances[0]);
+        } else {
+          setMultipleResults(grievances);
+        }
+      }
     } catch (err) {
-      setError("No grievance found with the provided details. Please check and try again.");
+      setError("An error occurred while searching. Please try again.");
     } finally {
       setIsSearching(false);
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "pending":
-        return "bg-yellow-100 text-yellow-800";
-      case "in_progress":
-        return "bg-blue-100 text-blue-800";
-      case "resolved":
-        return "bg-green-100 text-green-800";
-      case "rejected":
-        return "bg-red-100 text-red-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
+  const getSchemeName = (schemeId: string) => {
+    return SCHEMES.find((s) => s.id === schemeId)?.name || "Unknown Scheme";
   };
 
   const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "pending":
-        return <Clock className="w-5 h-5" />;
-      case "in_progress":
-        return <AlertCircle className="w-5 h-5" />;
-      case "resolved":
-        return <CheckCircle className="w-5 h-5" />;
-      default:
-        return <FileText className="w-5 h-5" />;
-    }
+    if (status.includes("resolved")) return <CheckCircle className="w-5 h-5" />;
+    if (status.includes("rejected")) return <XCircle className="w-5 h-5" />;
+    if (status.includes("info")) return <AlertTriangle className="w-5 h-5" />;
+    if (status.includes("hod") || status.includes("district")) return <AlertCircle className="w-5 h-5" />;
+    return <Clock className="w-5 h-5" />;
   };
 
   return (
@@ -182,18 +144,18 @@ export default function TrackGrievancePage() {
                     htmlFor="aadhaar"
                     className="block text-sm font-semibold text-gray-700 mb-2"
                   >
-                    Aadhaar Number
+                    Last 4 Digits of Aadhaar
                   </label>
                   <input
                     type="text"
                     id="aadhaar"
-                    value={aadhaarNumber}
+                    value={aadhaarLast4}
                     onChange={(e) => {
-                      const val = e.target.value.replace(/\D/g, "").slice(0, 12);
-                      setAadhaarNumber(val);
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 4);
+                      setAadhaarLast4(val);
                     }}
                     className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="Enter 12-digit Aadhaar number"
+                    placeholder="Enter last 4 digits"
                   />
                 </div>
                 <div>
@@ -233,7 +195,45 @@ export default function TrackGrievancePage() {
           </form>
         </div>
 
-        {/* Search Result */}
+        {/* Multiple Results */}
+        {multipleResults.length > 0 && (
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Found {multipleResults.length} Grievances
+            </h3>
+            <div className="space-y-3">
+              {multipleResults.map((grievance) => {
+                const statusColors = STATUS_COLORS[grievance.status];
+                return (
+                  <button
+                    key={grievance.id}
+                    onClick={() => {
+                      setResult(grievance);
+                      setMultipleResults([]);
+                    }}
+                    className="w-full text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="font-mono font-bold text-gray-800">
+                          {grievance.tracking_id}
+                        </p>
+                        <p className="text-sm text-gray-600 mt-1">
+                          {getSchemeName(grievance.scheme_id)}
+                        </p>
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColors.bg} ${statusColors.text}`}>
+                        {STATUS_LABELS[grievance.status]}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Single Result */}
         {result && (
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
             {/* Status Header */}
@@ -242,17 +242,17 @@ export default function TrackGrievancePage() {
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Tracking ID</p>
                   <p className="text-xl font-bold font-mono text-gray-800">
-                    {result.trackingId}
+                    {result.tracking_id}
                   </p>
                 </div>
-                <span
-                  className={`px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${getStatusColor(
-                    result.status
-                  )}`}
-                >
-                  {getStatusIcon(result.status)}
-                  {result.status.replace("_", " ").toUpperCase()}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 ${STATUS_COLORS[result.status].bg} ${STATUS_COLORS[result.status].text}`}
+                  >
+                    {getStatusIcon(result.status)}
+                    {STATUS_LABELS[result.status]}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -261,16 +261,18 @@ export default function TrackGrievancePage() {
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
                   <p className="text-sm text-gray-500">Scheme</p>
-                  <p className="font-medium text-gray-800">{result.schemeName}</p>
+                  <p className="font-medium text-gray-800">{getSchemeName(result.scheme_id)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Department</p>
-                  <p className="font-medium text-gray-800">{result.department}</p>
+                  <p className="text-sm text-gray-500">Current Level</p>
+                  <p className="font-medium text-gray-800">
+                    Level {result.current_level} {result.current_level === 1 ? "(Mandal)" : result.current_level === 2 ? "(District)" : "(HOD)"}
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Submitted On</p>
                   <p className="font-medium text-gray-800">
-                    {new Date(result.submittedAt).toLocaleDateString("en-IN", {
+                    {new Date(result.submitted_at).toLocaleDateString("en-IN", {
                       dateStyle: "medium",
                     })}
                   </p>
@@ -278,44 +280,45 @@ export default function TrackGrievancePage() {
                 <div>
                   <p className="text-sm text-gray-500">Last Updated</p>
                   <p className="font-medium text-gray-800">
-                    {new Date(result.lastUpdated).toLocaleDateString("en-IN", {
+                    {new Date(result.updated_at).toLocaleDateString("en-IN", {
                       dateStyle: "medium",
                     })}
                   </p>
                 </div>
               </div>
 
+              {/* Info Requested Message */}
+              {result.status === "info_requested" && (
+                <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="h-5 w-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-yellow-800">Additional Information Required</p>
+                      <p className="text-sm text-yellow-700 mt-1">
+                        The officer has requested additional information. Please check the timeline below for details.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Timeline */}
               <div className="border-t border-gray-100 pt-6">
-                <h3 className="font-semibold text-gray-800 mb-4">Status Timeline</h3>
-                <div className="space-y-4">
-                  {result.timeline.map((item, index) => (
-                    <div key={index} className="flex gap-4">
-                      <div className="flex flex-col items-center">
-                        <div
-                          className={`w-3 h-3 rounded-full ${
-                            index === result.timeline.length - 1
-                              ? "bg-green-600"
-                              : "bg-gray-300"
-                          }`}
-                        />
-                        {index < result.timeline.length - 1 && (
-                          <div className="w-0.5 h-full bg-gray-200 my-1" />
-                        )}
-                      </div>
-                      <div className="flex-1 pb-4">
-                        <p className="font-medium text-gray-800">{item.status}</p>
-                        <p className="text-sm text-gray-600">{item.description}</p>
-                        <p className="text-xs text-gray-400 mt-1">
-                          {new Date(item.date).toLocaleString("en-IN", {
-                            dateStyle: "medium",
-                            timeStyle: "short",
-                          })}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <h3 className="font-semibold text-gray-800 mb-6">Status Timeline</h3>
+                <GrievanceTimeline
+                  timeline={result.timeline.filter(entry => entry.is_public)}
+                  showAllEntries={false}
+                />
+              </div>
+
+              {/* Need Help */}
+              <div className="mt-6 pt-6 border-t border-gray-100">
+                <p className="text-sm text-gray-600 text-center">
+                  Need help with your grievance?{" "}
+                  <Link href="/contact" className="text-green-600 font-semibold hover:underline">
+                    Contact Support
+                  </Link>
+                </p>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getNotifications } from "../../lib/api";
+import { getNotifications } from "../../lib/api/api";
 
 type Notification = {
   id: number;

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { getGalleryImages, getGalleryCategories } from "../lib/api";
+import { getGalleryImages, getGalleryCategories } from "../lib/api/api";
 
 type GalleryItem = {
   id: number;

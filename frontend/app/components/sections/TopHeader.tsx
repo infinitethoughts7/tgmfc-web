@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Menu, Search, Plus, Minus, RotateCcw, Languages, Volume2, VolumeX } from "lucide-react";
+import Link from "next/link";
+import { Menu, Search, Plus, Minus, RotateCcw, Languages, Volume2, VolumeX, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAccessibility, Language } from "../../contexts/AccessibilityContext";
 
@@ -25,9 +26,7 @@ export default function TopHeader() {
     readText
   } = useAccessibility();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // Remove unnecessary useEffect and setMounted pattern as per React best practices
 
   const languageLabels: Record<Language, { name: string; nativeName: string }> = {
     en: { name: 'English', nativeName: 'English' },
@@ -103,6 +102,16 @@ export default function TopHeader() {
                 aria-label="Search"
               />
             </div>
+
+            {/* Officer Login Button */}
+            <Link
+              href="/officer/login"
+              className="flex items-center gap-2 px-4 py-2 bg-teal-700 hover:bg-teal-800 text-white rounded-lg font-medium transition-colors"
+              title="Officer Login"
+            >
+              <Shield className="h-4 w-4" />
+              <span className="text-sm">Officer Login</span>
+            </Link>
 
             {/* Accessibility Controls */}
             <div className="flex items-center gap-2 border-l border-gray-300 pl-4">
@@ -205,8 +214,16 @@ export default function TopHeader() {
               </div>
             </div>
 
-            {/* Accessibility Tools - Compact */}
+            {/* Officer Login & Accessibility Tools - Compact */}
             <div className="flex items-center gap-1">
+              <Link
+                href="/officer/login"
+                className="flex items-center gap-1 px-2 py-1 bg-teal-700 hover:bg-teal-800 text-white rounded text-xs font-medium transition-colors"
+                title="Officer Login"
+              >
+                <Shield className="h-3 w-3" />
+              </Link>
+
               <button onClick={decreaseFontSize} className="rounded p-1 hover:bg-green-100" aria-label="Decrease font size">
                 <Minus className="h-4 w-4 text-green-700" />
               </button>

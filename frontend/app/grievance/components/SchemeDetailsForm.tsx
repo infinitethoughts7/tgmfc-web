@@ -120,7 +120,7 @@ export default function SchemeDetailsForm({
             id={field.id}
             value={formData[field.id] || ""}
             onChange={(e) => handleChange(field.id, e.target.value)}
-            disabled={isDisabled}
+            disabled={isDisabled || false}
             className={`${commonClasses} disabled:bg-gray-100 disabled:cursor-not-allowed`}
           >
             <option value="">

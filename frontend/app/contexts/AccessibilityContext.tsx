@@ -22,7 +22,6 @@ declare global {
       };
     };
     googleTranslateElementInit?: () => void;
-    speechSynthesis: SpeechSynthesis;
   }
 }
 
