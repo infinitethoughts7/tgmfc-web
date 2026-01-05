@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "./Sidebar";
 import { Officer } from "@/app/lib/types/grievance";
+import { LogOut } from "lucide-react";
 
 type OfficerLayoutProps = {
   children: ReactNode;
@@ -44,6 +45,14 @@ export default function OfficerLayout({ children, officer }: OfficerLayoutProps)
                   {officer.name.split(" ").map(n => n[0]).join("").toUpperCase()}
                 </span>
               </div>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+                title="Logout"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden md:inline">Logout</span>
+              </button>
             </div>
           </div>
         </header>

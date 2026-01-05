@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AccessibilityProvider } from "./contexts/AccessibilityContext";
-import Footer from "./components/Footer";
-import TopHeader from "./components/sections/TopHeader";
-import NavBar from "./components/sections/NavBar";
+import ConditionalLayout from "./components/ConditionalLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,20 +31,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AccessibilityProvider>
-          {/* TopHeader - Available on all pages with scroll behavior */}
-          <TopHeader />
-          
-          {/* NavBar - Available on all pages, becomes sticky on scroll */}
-          <NavBar />
-          
-          {/* Main Content Area - Each page renders here */}
-          <main className="min-h-screen">
+          <ConditionalLayout>
             {children}
-          </main>
-          
-          {/* Footer - Appears on all pages */}
-          <Footer />
-          
+          </ConditionalLayout>
+
           {/* Google Translate Element Container */}
           <div id="google_translate_element" className="fixed top-4 right-4 z-50 hidden"></div>
         </AccessibilityProvider>

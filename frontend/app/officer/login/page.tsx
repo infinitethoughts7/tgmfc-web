@@ -89,7 +89,7 @@ export default function OfficerLoginPage() {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                     placeholder="Enter your username"
-                    className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                    className="w-full pl-11 pr-4 py-3 text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all placeholder:text-gray-500"
                     disabled={isLoading}
                   />
                 </div>
@@ -108,7 +108,7 @@ export default function OfficerLoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     placeholder="Enter your password"
-                    className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                    className="w-full pl-11 pr-4 py-3 text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all placeholder:text-gray-500"
                     disabled={isLoading}
                   />
                 </div>
