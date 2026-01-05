@@ -1,10 +1,11 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "./Sidebar";
 import { Officer } from "@/app/lib/types/grievance";
-import { LogOut } from "lucide-react";
+import { Camera } from "lucide-react";
+import Image from "next/image";
 
 type OfficerLayoutProps = {
   children: ReactNode;
@@ -13,11 +14,34 @@ type OfficerLayoutProps = {
 
 export default function OfficerLayout({ children, officer }: OfficerLayoutProps) {
   const router = useRouter();
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleLogout = () => {
     localStorage.removeItem("officer_token");
     router.push("/");
   };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setProfilePhoto(result);
+        localStorage.setItem(`officer_photo_${officer.id}`, result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Load saved photo on mount
+  useEffect(() => {
+    const savedPhoto = localStorage.getItem(`officer_photo_${officer.id}`);
+    if (savedPhoto) {
+      setProfilePhoto(savedPhoto);
+    }
+  }, [officer.id]);
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -40,19 +64,39 @@ export default function OfficerLayout({ children, officer }: OfficerLayoutProps)
                 <p className="text-sm font-medium text-gray-700">{officer.role.replace(/_/g, " ").toUpperCase()}</p>
                 <p className="text-xs text-gray-500">{officer.email}</p>
               </div>
-              <div className="h-10 w-10 rounded-full bg-green-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">
-                  {officer.name.split(" ").map(n => n[0]).join("").toUpperCase()}
-                </span>
+
+              {/* Profile Photo with Upload */}
+              <div className="relative group">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoUpload}
+                  className="hidden"
+                />
+                <div
+                  onClick={() => fileInputRef.current?.click()}
+                  className="h-12 w-12 rounded-full bg-green-600 flex items-center justify-center cursor-pointer relative overflow-hidden border-2 border-white shadow-md hover:shadow-lg transition-all"
+                >
+                  {profilePhoto ? (
+                    <Image
+                      src={profilePhoto}
+                      alt={officer.name}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <span className="text-white font-bold text-lg">
+                      {officer.name.split(" ")[0][0].toUpperCase()}
+                    </span>
+                  )}
+
+                  {/* Camera overlay on hover */}
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Camera className="h-5 w-5 text-white" />
+                  </div>
+                </div>
               </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
-                title="Logout"
-              >
-                <LogOut className="h-4 w-4" />
-                <span className="hidden md:inline">Logout</span>
-              </button>
             </div>
           </div>
         </header>
