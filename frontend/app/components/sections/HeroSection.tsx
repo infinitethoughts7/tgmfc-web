@@ -1,14 +1,5 @@
 import Notifications from "../sections/Notifications";
-import OfficialCard from "../OfficialCard";
-import officialsData from "../../mock/officials.json";
 import ImageCarousel from "../ImageCarousel";
-
-type Official = {
-  id: number;
-  name: string;
-  designation: string;
-  photo_url: string;
-};
 
 export default function HeroSection() {
   return (
@@ -17,36 +8,20 @@ export default function HeroSection() {
 
         {/* Mobile Layout */}
         <div className="lg:hidden flex flex-col gap-3">
-          {/* Officials - Horizontal on mobile */}
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            {officialsData.officials.map((official: Official) => (
-              <div key={official.id} className="shrink-0 w-40">
-                <OfficialCard official={official} />
-              </div>
-            ))}
-          </div>
-
           {/* Carousel */}
-          <div className="h-[250px]">
+          <div className="h-[300px]">
             <ImageCarousel />
           </div>
 
           {/* Notifications */}
-          <div className="h-[300px]">
+          <div className="h-[350px]">
             <Notifications />
           </div>
         </div>
 
-        {/* Desktop Layout */}
-        <div className="hidden lg:grid lg:grid-cols-[180px_1fr_280px] gap-3 h-[360px]">
-          {/* Officials - Left Column */}
-          <div className="flex flex-col gap-1">
-            {officialsData.officials.map((official: Official) => (
-              <OfficialCard key={official.id} official={official} />
-            ))}
-          </div>
-
-          {/* Carousel - Center Column */}
+        {/* Desktop Layout - Full Width */}
+        <div className="hidden lg:grid lg:grid-cols-[1fr_320px] gap-4 h-[450px]">
+          {/* Carousel - Left Column (Expanded) */}
           <div className="h-full">
             <ImageCarousel />
           </div>
