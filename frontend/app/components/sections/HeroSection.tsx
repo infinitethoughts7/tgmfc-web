@@ -12,8 +12,7 @@ export default function HeroSection() {
   );
 
   return (
-    <div className="w-full">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="w-full px-[3%]">
 
         {/* Mobile Layout */}
         <div className="lg:hidden flex flex-col gap-2">
@@ -53,7 +52,7 @@ export default function HeroSection() {
         </div>
 
         {/* Desktop Layout - 3 Column Grid */}
-        <div className="hidden lg:grid lg:grid-cols-[220px_1fr_220px] gap-3 h-[380px]">
+        <div className="hidden lg:grid lg:grid-cols-[160px_1fr_160px] gap-3 h-[380px]">
           
           {/* Left Column - Minister */}
           {minister && (
@@ -107,7 +106,6 @@ export default function HeroSection() {
             <Notifications />
           </div>
         </div>
-      </div>
     </div>
   );
 }
