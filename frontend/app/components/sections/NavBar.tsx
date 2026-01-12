@@ -53,7 +53,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`${isSticky ? 'sticky top-0 shadow-md' : 'relative'} z-50 w-full border-b bg-white transition-all duration-300`}>
+    <header className={`${isSticky ? 'sticky top-0 shadow-md' : 'relative shadow-sm'} z-50 w-full bg-white transition-all duration-300`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
 
         {/* Desktop Navigation */}
@@ -97,17 +97,15 @@ export default function Navbar() {
                   </button>
 
                   {openDropdown === item.label && (
-                    <div className="absolute left-0 top-full z-50 mt-2 w-56 rounded-md bg-white shadow-lg border border-gray-200">
-                      {item.children.map((child, index) =>
+                    <div className="absolute left-0 top-full z-50 mt-2 w-56 rounded-md bg-white shadow-xl">
+                      {item.children.map((child) =>
                         child.externalLink ? (
                           <a
                             key={child.label}
                             href={child.externalLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`block px-4 py-3 text-sm font-medium text-black hover:bg-green-100 hover:text-green-800 ${
-                              index !== item.children!.length - 1 ? 'border-b border-gray-100' : ''
-                            }`}
+                            className="block px-4 py-3 text-sm font-medium text-black hover:bg-green-100 hover:text-green-800"
                             onClick={() => setOpenDropdown(null)}
                           >
                             {child.label} <span className="text-xs">→</span>
@@ -120,8 +118,6 @@ export default function Navbar() {
                               isActive(child.href)
                                 ? "bg-green-500 text-white"
                                 : "text-black hover:bg-green-100 hover:text-green-800"
-                            } ${
-                              index !== item.children!.length - 1 ? 'border-b border-gray-100' : ''
                             }`}
                             onClick={() => setOpenDropdown(null)}
                           >
@@ -149,7 +145,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t bg-white px-4 py-3">
+        <div className="md:hidden bg-white px-4 py-3 shadow-inner">
           <ul className="space-y-1">
             {NAV_ITEMS.map((item) => (
               <li key={item.label}>
