@@ -54,16 +54,6 @@ export default function TopHeader() {
             </div>
           </div>
 
-          {/* Center: Inspirational Image */}
-          <div className="relative h-20 w-64 rounded-lg overflow-hidden border-2 border-green-200 shadow-md">
-            <Image
-              src="/images/inspiration.jpg"
-              alt="Department Inspiration"
-              fill
-              className="object-cover"
-            />
-          </div>
-
           {/* Right: Both Officials */}
           <div className="flex items-center gap-3">
             {officialsData.officials.map((official) => (
