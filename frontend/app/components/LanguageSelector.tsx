@@ -105,6 +105,7 @@ export default function LanguageSelector() {
   // Load Google Translate script on mount
   useEffect(() => {
     const windowWithGoogle = window as unknown as Window & WindowWithGoogle;
+    let widgetCreated = false;
 
     // Inject Google Translate element container if it doesn't exist
     let container = document.getElementById("google_translate_element");
@@ -113,25 +114,46 @@ export default function LanguageSelector() {
       container.id = "google_translate_element";
       container.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:0;height:0;overflow:hidden;";
       document.body.appendChild(container);
+    } else {
+      // Clear container to prevent duplicate widgets
+      container.innerHTML = '';
     }
 
-    // Function to create the widget
+    // Function to create the widget (only once)
     const createWidget = () => {
+      if (widgetCreated) {
+        console.log("Widget creation already in progress, skipping");
+        return;
+      }
+
       const google = windowWithGoogle.google;
       const el = document.getElementById("google_translate_element");
-      if (google?.translate?.TranslateElement && el && !el.hasChildNodes()) {
-        try {
-          new google.translate.TranslateElement(
-            {
-              pageLanguage: "en",
-              includedLanguages: languages.map(l => l.code).join(","),
-              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-              autoDisplay: false,
-            },
-            "google_translate_element"
-          );
-        } catch {
-          // Widget might already exist
+
+      if (google?.translate?.TranslateElement && el) {
+        // Check if widget already exists by looking for the select element
+        const existingSelect = document.querySelector(".goog-te-combo");
+
+        if (!existingSelect) {
+          // Widget doesn't exist, create it
+          widgetCreated = true;
+          try {
+            new google.translate.TranslateElement(
+              {
+                pageLanguage: "en",
+                includedLanguages: languages.map(l => l.code).join(","),
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false,
+              },
+              "google_translate_element"
+            );
+            console.log("✅ Google Translate widget created");
+          } catch (error) {
+            console.error("❌ Error creating widget:", error);
+            widgetCreated = false; // Allow retry on error
+          }
+        } else {
+          console.log("Widget already exists, skipping creation");
+          widgetCreated = true;
         }
       }
     };
@@ -139,68 +161,108 @@ export default function LanguageSelector() {
     // Function to apply translation when widget is ready - more aggressive retry
     const applyStoredLanguage = () => {
       const storedLang = getCurrentLanguage();
+      console.log("Attempting to apply stored language:", storedLang);
+
       if (storedLang !== "en") {
         let attempts = 0;
         const maxAttempts = 50; // Try for up to 10 seconds (50 * 200ms)
-        
+
         const checkAndApply = () => {
           const googleSelect = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
+
           if (googleSelect && googleSelect.options.length > 1) {
             // Widget is ready, apply translation
+            console.log(`✅ Widget ready! Applying ${storedLang} (attempt ${attempts + 1})`);
             googleSelect.value = storedLang;
             googleSelect.dispatchEvent(new Event("change", { bubbles: true }));
+
             // Verify and retry if needed
             setTimeout(() => {
               const newSelect = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
-              if (newSelect && newSelect.value !== storedLang && attempts < maxAttempts) {
-                attempts++;
-                newSelect.value = storedLang;
-                newSelect.dispatchEvent(new Event("change", { bubbles: true }));
+              if (newSelect && newSelect.value !== storedLang) {
+                console.log(`⚠️ Translation didn't stick, retrying... (value is ${newSelect.value}, expected ${storedLang})`);
+                if (attempts < maxAttempts) {
+                  attempts++;
+                  newSelect.value = storedLang;
+                  newSelect.dispatchEvent(new Event("change", { bubbles: true }));
+                }
+              } else {
+                console.log("✅ Translation applied successfully!");
               }
             }, 500);
           } else if (attempts < maxAttempts) {
             attempts++;
+            if (attempts % 10 === 0) {
+              console.log(`⏳ Waiting for widget... (attempt ${attempts}/${maxAttempts})`);
+            }
             // Keep checking until widget is ready
             setTimeout(checkAndApply, 200);
+          } else {
+            console.error("❌ Widget failed to load after maximum attempts");
           }
         };
         checkAndApply();
+      } else {
+        console.log("Language is English, no translation needed");
       }
     };
 
-    // Define the init callback (will be called by Google's script)
-    windowWithGoogle.googleTranslateElementInit = function() {
-      createWidget();
-      // After creating widget, apply stored language with longer delay
-      setTimeout(applyStoredLanguage, 1000);
-    };
+    // Define the init callback (will be called by Google's script) - only if not already defined
+    if (!windowWithGoogle.googleTranslateElementInit) {
+      console.log("Defining googleTranslateElementInit callback");
+      windowWithGoogle.googleTranslateElementInit = function() {
+        console.log("🔄 googleTranslateElementInit callback fired");
+        createWidget();
+        // After creating widget, apply stored language with longer delay
+        setTimeout(applyStoredLanguage, 1500);
+      };
+    } else {
+      console.log("Callback already defined, reusing it");
+    }
 
     // Load Google Translate script if not already loaded
     const scriptId = "google-translate-script";
     if (!document.getElementById(scriptId)) {
+      console.log("Loading Google Translate script for the first time...");
       const script = document.createElement("script");
       script.id = scriptId;
       script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
       script.async = true;
+      script.onload = () => console.log("Google Translate script loaded");
+      script.onerror = () => console.error("Failed to load Google Translate script");
       document.body.appendChild(script);
     } else {
+      console.log("Google Translate script already exists");
       // Script already exists - check if widget needs to be created
       if (windowWithGoogle.google?.translate?.TranslateElement) {
+        console.log("Google API ready, creating widget...");
         createWidget();
-        setTimeout(applyStoredLanguage, 1000);
+        setTimeout(applyStoredLanguage, 1500);
       } else {
+        console.log("Script exists but API not ready, waiting...");
         // Script is still loading, wait for it
+        let checkAttempts = 0;
         const checkGoogle = setInterval(() => {
+          checkAttempts++;
           if (windowWithGoogle.google?.translate?.TranslateElement) {
+            console.log("Google API ready after waiting");
             clearInterval(checkGoogle);
             createWidget();
-            setTimeout(applyStoredLanguage, 1000);
+            setTimeout(applyStoredLanguage, 1500);
+          } else if (checkAttempts > 150) {
+            // After 15 seconds, give up
+            console.error("Timed out waiting for Google Translate API");
+            clearInterval(checkGoogle);
           }
         }, 100);
-        // Clear interval after 15 seconds to prevent memory leak
-        setTimeout(() => clearInterval(checkGoogle), 15000);
       }
     }
+
+    // Cleanup function
+    return () => {
+      // Don't remove the script or container on unmount to preserve state across hot reloads
+      console.log("LanguageSelector unmounting (keeping Google Translate intact)");
+    };
   }, []);
 
   // Close dropdown when clicking outside

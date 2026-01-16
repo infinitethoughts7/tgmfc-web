@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import officialsData from "../../mock/officials.json";
-import LanguageSelector from "../LanguageSelector";
+import LanguageSelector from "../LanguageSelectorSimple";
 
 export default function TopHeader() {
   const [searchQuery, setSearchQuery] = useState("");

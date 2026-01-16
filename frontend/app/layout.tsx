@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AccessibilityProvider } from "./contexts/AccessibilityContext";
 import ConditionalLayout from "./components/ConditionalLayout";
+import GoogleTranslateScript from "./components/GoogleTranslateScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,8 +35,10 @@ export default function RootLayout({
           <ConditionalLayout>
             {children}
           </ConditionalLayout>
-
         </AccessibilityProvider>
+
+        {/* Google Translate Script - loaded once at app level */}
+        <GoogleTranslateScript />
       </body>
     </html>
   );
