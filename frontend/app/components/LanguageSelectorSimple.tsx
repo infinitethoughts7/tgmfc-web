@@ -27,46 +27,49 @@ export default function LanguageSelectorSimple() {
     return getCurrentLanguage();
   });
   const [isTranslating, setIsTranslating] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Handle hydration - set mounted flag
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Load translation state from session on mount
+  // Load translation state from session on mount (only after hydration)
   useEffect(() => {
     // Check if we're in the middle of a translation (page just reloaded with cookie)
-    if (selectedLang !== "en" && isTranslating && typeof window !== "undefined") {
-      console.log("Translation in progress, showing loader...");
+    const lang = getCurrentLanguage();
+    if (lang !== "en" && typeof window !== "undefined") {
+      const isReloading = sessionStorage.getItem("translating");
+      if (isReloading === "true") {
+        // Defer state update to avoid setState directly in the effect body
+        const startLoaderTimeout = setTimeout(() => {
+          setIsTranslating(true);
+          console.log("Translation in progress, showing loader...");
+        }, 0);
 
-      // Wait for Google Translate to apply translation
-      const checkTranslation = setInterval(() => {
-        // Check if translation has been applied by looking for Google's elements
-        const translatedElements = document.querySelectorAll("font[class*='translated']");
-        if (translatedElements.length > 0 || document.querySelector(".goog-te-combo")) {
-          console.log("Translation applied, hiding loader");
+        // Wait for Google Translate to apply translation
+        const checkTranslation = setInterval(() => {
+          // Check if translation has been applied by looking for Google's elements
+          const translatedElements = document.querySelectorAll("font[class*='translated']");
+          if (translatedElements.length > 0 || document.querySelector(".goog-te-combo")) {
+            console.log("Translation applied, hiding loader");
+            setIsTranslating(false);
+            sessionStorage.removeItem("translating");
+            clearInterval(checkTranslation);
+          }
+        }, 100);
+
+        // Fallback: hide loader after 3 seconds even if translation not detected
+        const fallbackTimeout = setTimeout(() => {
           setIsTranslating(false);
           sessionStorage.removeItem("translating");
           clearInterval(checkTranslation);
-        }
-      }, 100);
+        }, 3000);
 
-      // Fallback: hide loader after 3 seconds even if translation not detected
-      const fallbackTimeout = setTimeout(() => {
-        setIsTranslating(false);
-        sessionStorage.removeItem("translating");
-        clearInterval(checkTranslation);
-      }, 3000);
-
-      return () => {
-        clearInterval(checkTranslation);
-        clearTimeout(fallbackTimeout);
-      };
+        return () => {
+          clearTimeout(startLoaderTimeout);
+          clearInterval(checkTranslation);
+          clearTimeout(fallbackTimeout);
+        };
+      }
     }
     return undefined;
-  }, [selectedLang, isTranslating]);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
