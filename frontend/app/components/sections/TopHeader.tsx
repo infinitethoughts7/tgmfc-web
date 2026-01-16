@@ -31,7 +31,7 @@ export default function TopHeader() {
   }, [lastScrollY]);
 
   return (
-    <div className={`w-full border-b bg-white transition-transform duration-300 relative z-[60] ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <div className={`w-full border-b bg-white transition-transform duration-300 relative z-60 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="mx-auto max-w-7xl px-4 py-3">
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center justify-between gap-4">
@@ -60,7 +60,7 @@ export default function TopHeader() {
             {officialsData.officials.map((official) => (
               <div
                 key={official.id}
-                className="flex items-center gap-2 bg-gradient-to-r from-green-50 to-white rounded-lg px-3 py-2 border border-green-200 shadow-sm"
+                className="flex items-center gap-2 bg-grad  ient-to-r from-green-50 to-white rounded-lg px-3 py-2 border border-green-200 shadow-sm hover:bg-green-100 transition-colors"
               >
                 <div className="relative h-14 w-14 rounded-full border-2 border-green-500 overflow-hidden">
                   <Image
@@ -125,7 +125,7 @@ export default function TopHeader() {
             {officialsData.officials.map((official) => (
               <div
                 key={official.id}
-                className="shrink-0 flex items-center gap-2 bg-gradient-to-r from-green-50 to-white rounded-lg px-2 py-2 border border-green-200 shadow-sm min-w-[200px]"
+                className="shrink-0 flex items-center gap-2 bg-green-50 from-green-50 to-white rounded-lg px-2 py-2 border border-green-200 shadow-sm min-w-[200px] hover:bg-green-100 transition-colors "
               >
                 <div className="relative h-12 w-12 rounded-full border-2 border-green-500 overflow-hidden">
                   <Image
