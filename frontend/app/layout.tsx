@@ -35,8 +35,6 @@ export default function RootLayout({
             {children}
           </ConditionalLayout>
 
-          {/* Google Translate Element Container */}
-          <div id="google_translate_element" className="fixed top-4 right-4 z-50 hidden"></div>
         </AccessibilityProvider>
       </body>
     </html>

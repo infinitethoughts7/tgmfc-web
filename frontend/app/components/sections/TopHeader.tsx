@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import officialsData from "../../mock/officials.json";
+import LanguageSelector from "../LanguageSelector";
 
 export default function TopHeader() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,7 +55,7 @@ export default function TopHeader() {
             </div>
           </div>
 
-          {/* Right: Both Officials */}
+          {/* Right: Both Officials + Language Selector */}
           <div className="flex items-center gap-3">
             {officialsData.officials.map((official) => (
               <div
@@ -79,12 +80,13 @@ export default function TopHeader() {
                 </div>
               </div>
             ))}
+            <LanguageSelector />
           </div>
         </div>
 
         {/* Mobile Layout */}
         <div className="md:hidden flex flex-col gap-3">
-          {/* Top Row: Logo + Title */}
+          {/* Top Row: Logo + Title + Language Selector */}
           <div className="flex items-center gap-2">
             <div className="relative h-12 w-12 shrink-0">
               <Image
@@ -102,6 +104,7 @@ export default function TopHeader() {
                 تلنگانہ محکمہ اقلیتی بہبود
               </span>
             </div>
+            <LanguageSelector />
           </div>
 
           {/* Search Bar */}
