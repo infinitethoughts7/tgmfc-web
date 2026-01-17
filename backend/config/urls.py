@@ -9,10 +9,13 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views 
 
 from cms.api import (
-    api_router, 
+    api_router,
     notifications_list,
     gallery_categories_list,
     gallery_images_list,
+    news_categories_list,
+    press_releases_list,
+    press_release_detail,
 )
 
 urlpatterns = [
@@ -28,6 +31,11 @@ urlpatterns = [
     path("api/v2/notifications/", notifications_list, name="notifications-list"),
     path("api/v2/gallery/categories/", gallery_categories_list, name="gallery-categories"),
     path("api/v2/gallery/images/", gallery_images_list, name="gallery-images"),
+
+    # News & Press Releases APIs
+    path("api/v2/news/categories/", news_categories_list, name="news-categories"),
+    path("api/v2/news/", press_releases_list, name="press-releases-list"),
+    path("api/v2/news/<slug:slug>/", press_release_detail, name="press-release-detail"),
 
     # Wagtail catch-all (keep at bottom)
     path("", include(wagtail_urls)),
