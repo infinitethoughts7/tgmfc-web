@@ -174,29 +174,9 @@ export default function NewsDetailPage() {
         )}
 
         {/* Article Body */}
-        <div
-          className="prose prose-lg max-w-none mb-8"
-          dangerouslySetInnerHTML={{ __html: article.body }}
-        />
-
-        {/* Tags */}
-        {article.tags && article.tags.length > 0 && (
-          <div className="border-t border-b border-gray-200 py-6 mb-8">
-            <h3 className="text-sm font-semibold text-gray-500 uppercase mb-3">
-              Tags
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {article.tags.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors cursor-pointer"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
+        <div className="text-gray-800 text-lg leading-relaxed mb-8">
+          {article.body}
+        </div>
 
         {/* Footer Metadata */}
         <div className="bg-gray-100 rounded-lg p-6 text-sm text-gray-600">
