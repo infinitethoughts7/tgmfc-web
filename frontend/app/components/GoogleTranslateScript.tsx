@@ -1,14 +1,15 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function GoogleTranslateScript() {
+  const [scriptFailed, setScriptFailed] = useState(false);
+
   useEffect(() => {
     // Define the callback function that Google Translate will call
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).googleTranslateElementInit = function() {
-      console.log("Initializing Google Translate widget");
-
       // Create hidden container for the widget
       let container = document.getElementById("google_translate_element");
       if (!container) {
@@ -19,7 +20,9 @@ export default function GoogleTranslateScript() {
       }
 
       // Initialize Google Translate
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if ((window as any).google?.translate?.TranslateElement) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         new (window as any).google.translate.TranslateElement(
           {
             pageLanguage: "en",
@@ -28,21 +31,24 @@ export default function GoogleTranslateScript() {
           },
           "google_translate_element"
         );
-        console.log("Google Translate widget initialized");
       }
     };
   }, []);
+
+  // Don't render anything if script already failed
+  if (scriptFailed) {
+    return null;
+  }
 
   return (
     <Script
       id="google-translate-script"
       src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
       strategy="afterInteractive"
-      onLoad={() => {
-        console.log("Google Translate script loaded");
-      }}
-      onError={(e) => {
-        console.error("Failed to load Google Translate script:", e);
+      onError={() => {
+        // Silently handle the error - Google Translate may be blocked by ad blockers
+        // or network restrictions. The site will continue to work without translation.
+        setScriptFailed(true);
       }}
     />
   );
