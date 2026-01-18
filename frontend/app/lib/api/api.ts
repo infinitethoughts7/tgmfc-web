@@ -65,7 +65,7 @@ export async function getPressReleases(
 export async function getPressReleaseBySlug(
   slug: string
 ): Promise<PressReleaseDetail> {
-  const res = await fetch(`${API_BASE}/news/${slug}/`, {
+  const res = await fetch(`${API_BASE}/news/${slug}`, {
     cache: "no-store",
   });
 

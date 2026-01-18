@@ -3,10 +3,10 @@ import newsData from "@/app/mock/news-press-releases.json";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { slug } = params;
+    const { slug } = await params;
 
     const newsItem = newsData.news.find((item) => item.slug === slug);
 
@@ -40,6 +40,8 @@ export async function GET(
       category_slug: category?.slug,
       category_name_te: category?.name_te,
       related_news: relatedNews,
+      created_at: newsItem.published_date,
+      updated_at: newsItem.published_date,
     };
 
     return NextResponse.json(newsWithCategory);
