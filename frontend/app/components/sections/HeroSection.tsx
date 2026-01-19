@@ -25,7 +25,7 @@ export default function HeroSection() {
                     src={minister.photo_url}
                     alt={minister.name}
                     fill
-                    className="object-cover object-top"
+                    className="object-cover object-bottom scale-150 origin-bottom translate-y-2"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -73,7 +73,7 @@ export default function HeroSection() {
                       src={minister.photo_url}
                       alt={minister.name}
                       fill
-                      className="object-cover object-top"
+                      className="object-cover object-bottom scale-153 origin-bottom translate-y-10"
                     />
                   </div>
                 </div>
