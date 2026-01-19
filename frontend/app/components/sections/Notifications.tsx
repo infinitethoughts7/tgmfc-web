@@ -19,7 +19,14 @@ export default function Notifications() {
     const fetchNotifications = async () => {
       try {
         const data = await getNotifications();
-        setItems(data.notifications || []);
+        const normalized = Array.isArray(data)
+          ? data
+          : Array.isArray(data?.notifications)
+            ? data.notifications
+            : Array.isArray(data?.results)
+              ? data.results
+              : [];
+        setItems(normalized);
         setLoading(false);
       } catch {
         setError('Failed to load notifications');
@@ -61,6 +68,10 @@ export default function Notifications() {
         ) : error ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-sm text-red-500">{error}</div>
+          </div>
+        ) : items.length === 0 ? (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-sm text-gray-500">No notifications yet.</div>
           </div>
         ) : (
           <ul className="h-full">
