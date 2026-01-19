@@ -11,7 +11,7 @@ export default function OfficialCard({ official }: { official: Official }) {
     <div className="h-full flex flex-col items-center justify-center rounded-xl p-2 bg-white shadow-lg border border-gray-100">
 
       {/* Photo */}
-      <div className="relative h-20 w-20 lg:h-24 lg:w-24 rounded-lg border-1 border-green-500 bg-green- p-1">
+      <div className="relative h-20 w-20 lg:h-24 lg:w-24 rounded-lg border border-green-500 bg-green- p-1">
         <Image
           src={official.photo_url}
           alt={official.name}

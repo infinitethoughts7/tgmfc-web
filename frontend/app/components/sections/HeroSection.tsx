@@ -18,14 +18,14 @@ export default function HeroSection() {
         <div className="lg:hidden flex flex-col gap-2">
           {/* Minister Card */}
           {minister && (
-            <div className="bg-gradient-to-br from-green-50 via-white to-green-50 rounded-lg p-3">
+            <div className="bg-linear-to-br from-green-50 via-white to-green-50 rounded-lg p-3">
               <div className="flex items-center gap-3">
-                <div className="relative h-16 w-16 rounded-full border-2 border-green-500 overflow-hidden">
+                <div className="relative h-28 w-28 rounded-lg border-2 border-green-500 overflow-hidden">
                   <Image
                     src={minister.photo_url}
                     alt={minister.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -56,7 +56,7 @@ export default function HeroSection() {
           
           {/* Left Column - Minister */}
           {minister && (
-            <div className="h-full bg-gradient-to-br from-green-50 via-white to-emerald-50 rounded-lg flex flex-col items-center justify-center p-4 relative overflow-hidden">
+            <div className="h-full bg-linear-to-br from-green-50 via-white to-emerald-50 rounded-lg flex flex-col items-center justify-center p-4 relative overflow-hidden">
               {/* Decorative Background Pattern */}
               <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-green-600 rounded-full -translate-y-1/2 translate-x-1/2"></div>
@@ -67,13 +67,13 @@ export default function HeroSection() {
               <div className="relative z-10 flex flex-col items-center text-center">
                 {/* Photo with decorative ring */}
                 <div className="relative mb-3">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full blur-md opacity-30 scale-110"></div>
-                  <div className="relative h-28 w-28 rounded-full border-3 border-green-500 overflow-hidden bg-white">
+                  <div className="absolute inset-0 bg-linear-to-br from-green-400 to-emerald-600 rounded-lg blur-md opacity-30 scale-110"></div>
+                  <div className="relative h-50 w-50 rounded-lg border-2 border-green-500 overflow-hidden bg-white">
                     <Image
                       src={minister.photo_url}
                       alt={minister.name}
                       fill
-                      className="object-cover"
+                      className="object-cover object-top"
                     />
                   </div>
                 </div>
