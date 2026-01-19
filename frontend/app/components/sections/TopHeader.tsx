@@ -39,7 +39,7 @@ export default function TopHeader() {
           <div className="flex items-center gap-3">
             <div className="relative h-16 w-16">
               <Image
-                src="/logos/telangana.png"
+                src="/logos/mmw_logo.png"
                 alt="Telangana Government Logo"
                 fill
                 className="object-contain"
