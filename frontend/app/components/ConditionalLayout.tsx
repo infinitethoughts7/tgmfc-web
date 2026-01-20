@@ -19,12 +19,11 @@ export default function ConditionalLayout({ children }: { children: React.ReactN
         <>
           <TopHeader />
           <NavBar />
-          <AccessibilityBar />
         </>
       )}
 
       {/* Main Content */}
-      <main className={isOfficerRoute ? "" : "min-h-screen"}>
+      <main id="main-content" className={isOfficerRoute ? "" : "min-h-screen"}>
         {children}
       </main>
 

@@ -5,11 +5,13 @@ import { Search } from "lucide-react";
 import { useState, useEffect } from "react";
 import officialsData from "../../mock/officials.json";
 import LanguageSelector from "../LanguageSelectorSimple";
+import { useAccessibility } from "../../contexts/AccessibilityContext";
 
 export default function TopHeader() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { increaseFontSize, decreaseFontSize, resetFontSize } = useAccessibility();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +34,44 @@ export default function TopHeader() {
 
   return (
     <div className={`w-full border-b bg-white transition-transform duration-300 relative z-60 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+      {/* Accessibility Bar */}
+      <div className="w-full bg-gray-900 text-white">
+        <div className="mx-auto max-w-7xl px-4 py-1.5 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={decreaseFontSize}
+              className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
+              aria-label="Decrease font size"
+              title="Decrease font size"
+            >
+              A-
+            </button>
+            <button
+              onClick={resetFontSize}
+              className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
+              aria-label="Reset font size"
+              title="Reset font size"
+            >
+              A
+            </button>
+            <button
+              onClick={increaseFontSize}
+              className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
+              aria-label="Increase font size"
+              title="Increase font size"
+            >
+              A+
+            </button>
+          </div>
+          <a
+            href="#main-content"
+            className="text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 px-3 py-1 rounded"
+          >
+            Skip to main content
+          </a>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-7xl px-4 py-3">
         {/* Desktop Layout */}
         <div className="hidden md:flex items-center justify-between gap-4">
