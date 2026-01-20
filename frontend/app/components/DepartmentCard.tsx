@@ -12,7 +12,7 @@ type Department = {
 
 export default function DepartmentCard({ department }: { department: Department }) {
   const cardContent = (
-    <div className="group relative bg-white hover:bg-green-700 rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 p-6 flex flex-col h-full cursor-pointer hover:scale-[0.98]">
+    <div className="group relative bg-white hover:bg-green-600 rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 p-6 flex flex-col h-full cursor-pointer hover:scale-[0.98]">
       {/* Icon */}
       <div className="w-12 h-12 relative mb-4 text-red-600">
         <Image

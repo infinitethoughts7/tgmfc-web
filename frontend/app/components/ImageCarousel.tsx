@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const images = [
-  "/images/m1.jpeg",
-  "/images/m5.jpeg",
-  "/images/m10.jpeg",
-  "/images/m15.jpeg",
-  "/images/m20.jpeg"
+  "/news-press/p1.jpeg",
+  "/news-press/p2.jpeg",
+  "/news-press/p3.jpeg",
+  "/news-press/p4.jpeg",
+  "/news-press/p6.jpeg",
+  "/news-press/p9.jpeg",
+  "/news-press/p10.jpeg",
+  "/news-press/p11.jpeg"
 ];
 
 export default function ImageCarousel() {
