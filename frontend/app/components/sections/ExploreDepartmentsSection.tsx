@@ -1,5 +1,6 @@
 import DepartmentCard from "../DepartmentCard";
 import departmentsData from "../../mock/department-names.json";
+import { Building2 } from "lucide-react";
 
 type Department = {
   id: number;
@@ -15,10 +16,16 @@ export default function ExploreDepartmentsSection() {
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-gray-800">
-            Explore Our Departments
-          </h2>
+        <div className="flex items-center justify-between mb-10">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <Building2 className="w-8 h-8 text-green-600" />
+              <h2 className="text-3xl md:text-4xl font-bold text-teal-800">
+                Explore Our Departments
+              </h2>
+            </div>
+            <div className="w-24 h-1 bg-green-600"></div>
+          </div>
         </div>
 
         {/* Cards Grid */}
