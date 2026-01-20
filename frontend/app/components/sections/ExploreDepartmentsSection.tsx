@@ -14,7 +14,7 @@ export default function ExploreDepartmentsSection() {
   return (
     <section className="w-full bg-gray-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
         <div className="flex items-center justify-between mb-10">
           <div>

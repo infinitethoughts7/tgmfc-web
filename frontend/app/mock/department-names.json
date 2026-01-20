@@ -2,7 +2,7 @@
   "departments": [
     {
       "id": 1,
-      "name": "Telangana Minorities Residential Educational Institutions Society (TGMREIS)",
+      "name": "TGMREIS",
       "slug": "tgmreis",
       "logos": "/logos/tgmries_logo.png",
       "externalLink": "https://tgmreistelangana.cgg.gov.in"
@@ -23,7 +23,7 @@
     },
     {
       "id": 4,
-      "name": "Telangana Christian Minority Finance Corporation",
+      "name": "Christian Minority Finance Corporation",
       "slug": "christian-minority-finance-corporation",
       "logos": "/logos/telangana.png",
       "externalLink": "https://tgcmfc.in/"

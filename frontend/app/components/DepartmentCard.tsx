@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 type Department = {
   id: number;
@@ -11,21 +12,26 @@ type Department = {
 
 export default function DepartmentCard({ department }: { department: Department }) {
   const cardContent = (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col items-center text-center h-full cursor-pointer">
-      <div className="w-20 h-20 relative mb-4">
+    <div className="group relative bg-white hover:bg-green-700 rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 p-6 flex flex-col h-full cursor-pointer hover:scale-[0.98]">
+      {/* Icon */}
+      <div className="w-12 h-12 relative mb-4 text-red-600">
         <Image
           src={department.logos}
           alt={department.name}
           fill
-          className="object-contain"
+          className="object-contain transition-transform duration-300 group-hover:scale-110"
         />
       </div>
-      <h3 className="text-sm font-semibold text-gray-800 leading-tight">
+
+      {/* Department Name */}
+      <h3 className="text-xl font-bold text-gray-900 group-hover:text-white leading-tight mb-3 flex-grow">
         {department.name}
       </h3>
-      {department.externalLink && (
-        <span className="mt-2 text-xs text-green-600">Visit Website ↗</span>
-      )}
+
+      {/* Arrow Icon */}
+      <div className="flex items-center justify-start mt-auto">
+        <ArrowRight className="w-6 h-6 text-green-700 group-hover:text-white transition-all duration-300 group-hover:translate-x-1" />
+      </div>
     </div>
   );
 
