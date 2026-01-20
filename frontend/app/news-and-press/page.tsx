@@ -81,8 +81,8 @@ export default function NewsAndPressPage() {
           </h1>
           <div className="w-24 h-1 bg-green-600"></div>
         </div>
-
-        {/* Search Bar */}
+{/* 
+        Search Bar
         <div className="mb-6">
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -94,7 +94,7 @@ export default function NewsAndPressPage() {
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder:text-gray-500 focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 mb-8">
