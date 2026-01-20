@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { getGalleryImages, getGalleryCategories } from "../lib/api/api";
 import { X, ChevronLeft, ChevronRight, Download, ZoomIn, Calendar, Image as ImageIcon } from "lucide-react";
 
 type GalleryItem = {
@@ -18,6 +17,8 @@ type Category = {
   label: string;
 };
 
+const BACKEND_URL = "http://localhost:8000";
+
 export default function PhotoGalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
@@ -30,10 +31,17 @@ export default function PhotoGalleryPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [imagesData, categoriesData] = await Promise.all([
-          getGalleryImages(),
-          getGalleryCategories(),
+        const [imagesRes, categoriesRes] = await Promise.all([
+          fetch(`${BACKEND_URL}/api/v2/gallery/images/`),
+          fetch(`${BACKEND_URL}/api/v2/gallery/categories/`),
         ]);
+
+        if (!imagesRes.ok || !categoriesRes.ok) {
+          throw new Error("Failed to fetch gallery data");
+        }
+
+        const imagesData = await imagesRes.json();
+        const categoriesData = await categoriesRes.json();
 
         setGallery(imagesData.gallery || []);
         setCategories([
@@ -41,7 +49,8 @@ export default function PhotoGalleryPage() {
           ...(categoriesData.categories || []),
         ]);
         setLoading(false);
-      } catch {
+      } catch (err) {
+        console.error("Gallery fetch error:", err);
         setError("Failed to load gallery");
         setLoading(false);
       }
