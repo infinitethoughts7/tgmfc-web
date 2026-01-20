@@ -91,5 +91,5 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Schemes", href: "/schemes" },
   { label: "Photo Gallery", href: "/photo-gallery" },
   { label: "Achievements", href: "/achievements" },
-  { label: "Budget", href: "/budget" },
+  // { label: "Budget", href: "/budget" },
 ];
