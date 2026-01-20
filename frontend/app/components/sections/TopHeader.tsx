@@ -46,11 +46,8 @@ export default function TopHeader() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-green-700">
+              <span className="text-2xl font-bold text-green-700">
                 Telangana Ministry of Minority Welfare
-              </span>
-              <span className="text-base font-bold text-green-700">
-                تلنگانہ محکمہ اقلیتی بہبود
               </span>
             </div>
           </div>
@@ -60,9 +57,9 @@ export default function TopHeader() {
             {officialsData.officials.map((official) => (
               <div
                 key={official.id}
-                className="flex items-center gap-2 bg-grad  ient-to-r from-green-50 to-white rounded-lg px-3 py-2 border border-green-200 shadow-sm hover:bg-green-100 transition-colors"
+                className="flex items-center gap-3"
               >
-                <div className="relative h-14 w-14 rounded-full border-2 border-green-500 overflow-hidden">
+                <div className="relative h-16 w-16 rounded-full border-2 border-green-500 overflow-hidden">
                   <Image
                     src={official.photo_url}
                     alt={official.name}
