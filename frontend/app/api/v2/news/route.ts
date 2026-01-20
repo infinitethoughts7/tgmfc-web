@@ -43,6 +43,14 @@ export async function GET(request: Request) {
       filteredNews = filteredNews.slice(0, limitNum);
     }
 
+    const normalizeImagePath = (path: string | null) => {
+      if (!path) return null;
+      if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("/")) {
+        return path;
+      }
+      return `/${path}`;
+    };
+
     // Map news items to include category information
     const newsWithCategories = filteredNews.map((item) => {
       const category = newsData.categories.find(
@@ -50,6 +58,7 @@ export async function GET(request: Request) {
       );
       return {
         ...item,
+        featured_image: normalizeImagePath(item.featured_image),
         category_name: category?.name,
         category_slug: category?.slug,
         category_name_te: category?.name_te,

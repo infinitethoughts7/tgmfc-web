@@ -17,6 +17,14 @@ export async function GET(
       );
     }
 
+    const normalizeImagePath = (path: string | null) => {
+      if (!path) return null;
+      if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("/")) {
+        return path;
+      }
+      return `/${path}`;
+    };
+
     // Get category information
     const category = newsData.categories.find(
       (cat) => cat.id === newsItem.category
@@ -30,12 +38,14 @@ export async function GET(
       .slice(0, 3)
       .map((item) => ({
         ...item,
+        featured_image: normalizeImagePath(item.featured_image),
         category_name: category?.name,
         category_slug: category?.slug,
       }));
 
     const newsWithCategory = {
       ...newsItem,
+      featured_image: normalizeImagePath(newsItem.featured_image),
       category_name: category?.name,
       category_slug: category?.slug,
       category_name_te: category?.name_te,
