@@ -29,9 +29,10 @@ import { SCHEMES, getSchemeById, generateTrackingId, getFormTemplate } from "../
 // ------------------------------------
 // CONFIGURATION
 // ------------------------------------
+import { API_V1_URL } from "./config";
 
 const USE_MOCK_DATA = true; // Set to false when Wagtail API is ready
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+const API_BASE_URL = API_V1_URL;
 
 // Simulated network delay for realistic UX testing
 const MOCK_DELAY = 500;
