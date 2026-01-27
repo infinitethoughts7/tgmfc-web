@@ -104,11 +104,11 @@ export default function TopHeader() {
                     src={official.photo_url}
                     alt={official.name}
                     fill
-                    className="object-cover"
+                    className="object-cover scale-120"
                   />
                 </div>
                 <div className="flex flex-col">
-                  <h3 className="text-sm font-bold text-green-900 leading-tight">
+                  <h3 className="text-sm font-bold text-green-900 leading-tight ">
                     {official.name}
                   </h3>
                   <span className="text-xs font-semibold text-green-700">
