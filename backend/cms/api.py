@@ -101,11 +101,13 @@ def press_releases_list(request):
         press_releases = press_releases.filter(is_featured=True)
 
     if search:
+        from django.db.models import Q
         press_releases = press_releases.filter(
-            title__icontains=search
-        ) | press_releases.filter(
-            excerpt__icontains=search
+            Q(title__icontains=search) | Q(excerpt__icontains=search)
         )
+
+    # Get total count before limiting
+    total_count = press_releases.count()
 
     # Apply limit
     if limit:
@@ -137,7 +139,8 @@ def press_releases_list(request):
                 "views": pr.views,
             }
             for pr in press_releases
-        ]
+        ],
+        "total": total_count,
     }
     return Response(data)
 
@@ -152,6 +155,28 @@ def press_release_detail(request, slug):
 
         # Increment view count
         pr.increment_views()
+
+        # Get related news (same category, excluding current article)
+        related_news = []
+        if pr.category:
+            related_qs = PressRelease.objects.filter(
+                is_published=True,
+                category=pr.category
+            ).exclude(id=pr.id).select_related('category', 'featured_image')[:3]
+
+            related_news = [
+                {
+                    "id": r.id,
+                    "title": r.title,
+                    "slug": r.slug,
+                    "excerpt": r.excerpt,
+                    "featured_image": request.build_absolute_uri(r.featured_image.file.url) if r.featured_image else None,
+                    "published_date": r.published_date.isoformat(),
+                    "category_name": r.category.name if r.category else None,
+                    "category_slug": r.category.slug if r.category else None,
+                }
+                for r in related_qs
+            ]
 
         data = {
             "id": pr.id,
@@ -176,6 +201,7 @@ def press_release_detail(request, slug):
             "created_at": pr.created_at.isoformat(),
             "updated_at": pr.updated_at.isoformat(),
             "views": pr.views,
+            "related_news": related_news,
         }
         return Response(data)
     except PressRelease.DoesNotExist:
