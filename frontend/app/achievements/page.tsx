@@ -57,7 +57,7 @@ export default function AchievementsPage() {
             Milestones & Achievements
           </h1>
           <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-            Highlighting the Government of Telangana's commitment to Minority Welfare through
+            Highlighting the Government of Telangana&apos;s commitment to Minority Welfare through
             record-breaking budget allocations, educational excellence, and infrastructure development.
           </p>
         </div>
