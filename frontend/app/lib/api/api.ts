@@ -4,8 +4,9 @@ import type {
   PressReleaseDetail,
   PressReleaseFilters,
 } from "../types/news";
+import { API_V2_URL } from "./config";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+const API_BASE = API_V2_URL;
 
 export async function getNotifications() {
   const res = await fetch(`${API_BASE}/notifications/`, {
