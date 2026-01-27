@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, Download, ZoomIn, Calendar, Image as ImageIcon } from "lucide-react";
+import { getGalleryImages, getGalleryCategories } from "../lib/api/api";
 
 type GalleryItem = {
   id: number;
@@ -17,8 +18,6 @@ type Category = {
   label: string;
 };
 
-const BACKEND_URL = "http://localhost:8000";
-
 export default function PhotoGalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
@@ -31,17 +30,10 @@ export default function PhotoGalleryPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [imagesRes, categoriesRes] = await Promise.all([
-          fetch(`${BACKEND_URL}/api/v2/gallery/images/`),
-          fetch(`${BACKEND_URL}/api/v2/gallery/categories/`),
+        const [imagesData, categoriesData] = await Promise.all([
+          getGalleryImages(),
+          getGalleryCategories(),
         ]);
-
-        if (!imagesRes.ok || !categoriesRes.ok) {
-          throw new Error("Failed to fetch gallery data");
-        }
-
-        const imagesData = await imagesRes.json();
-        const categoriesData = await categoriesRes.json();
 
         setGallery(imagesData.gallery || []);
         setCategories([
