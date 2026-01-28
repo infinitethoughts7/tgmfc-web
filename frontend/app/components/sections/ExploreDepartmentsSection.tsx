@@ -8,6 +8,7 @@ type Department = {
   slug: string;
   logos: string;
   externalLink?: string | null;
+  description?: string;
 };
 
 export default function ExploreDepartmentsSection() {

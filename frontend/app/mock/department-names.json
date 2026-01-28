@@ -28,7 +28,7 @@
       "id": 4,
       "name": "Christian Minority Finance Corporation",
       "slug": "christian-minority-finance-corporation",
-      "logos": "/logos/telangana.png",
+      "logos": "/logos/christian.png",
       "externalLink": "https://tgcmfc.in/",
       "description": "Implements welfare schemes and provides financial assistance to support the economic upliftment of Christian minorities."
     },
@@ -44,7 +44,7 @@
       "id": 6,
       "name": "Waqf Tribunal",
       "slug": "waqf-tribunal",
-      "logos": "/logos/telangana.png",
+      "logos": "/logos/waqf-board.png",
       "externalLink": "https://waqf.telangana.gov.in/",
       "description": "A judicial body that adjudicates disputes and legal matters related to Waqf properties and institutions."
     },
