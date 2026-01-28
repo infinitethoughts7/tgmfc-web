@@ -82,7 +82,7 @@ export default function Navbar() {
                     className={`flex items-center gap-1 rounded px-3 py-2 font-semibold transition-all duration-200
                       ${
                         openDropdown === item.label || hasActiveChild(item.children)
-                          ? "bg-green-500 text-white scale-105"
+                          ? "bg-green-600 text-white scale-100"
                           : "text-black hover:bg-green-600 hover:text-white hover:scale-105"
                       }`}
                     aria-haspopup="true"
