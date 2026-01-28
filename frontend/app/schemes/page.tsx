@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -61,6 +62,9 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function SchemesPage() {
+  const searchParams = useSearchParams();
+  const schemeId = searchParams.get('id');
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [incomeFilter, setIncomeFilter] = useState('all');
@@ -69,6 +73,9 @@ export default function SchemesPage() {
   const schemes: Scheme[] = schemesData.schemes;
   const categories: Category[] = schemesData.categories;
   const categoryMapping: Record<string, string> = schemesData.categoryMapping;
+
+  // If schemeId is provided, find that specific scheme
+  const selectedScheme = schemeId ? schemes.find(s => s.id === schemeId) : null;
 
   // Filter and sort schemes
   const filteredSchemes = useMemo(() => {
@@ -120,6 +127,34 @@ export default function SchemesPage() {
 
     return filtered;
   }, [searchQuery, selectedCategory, incomeFilter, sortBy, schemes, categoryMapping]);
+
+  // If a specific scheme is selected, show only that scheme
+  if (selectedScheme) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b dark:from-slate-950 dark:to-slate-900 px-3 py-4 sm:px-4 sm:py-6 md:p-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Back Button */}
+          <Button
+            variant="outline"
+            className="mb-6 border-green-300 text-green-700 hover:bg-green-50"
+            onClick={() => window.history.back()}
+          >
+            ← Back to All Schemes
+          </Button>
+
+          {/* Single Scheme Card */}
+          <SchemeCard scheme={selectedScheme} />
+
+          {/* View All Link */}
+          <div className="mt-6 text-center">
+            <Button asChild variant="outline" className="border-green-300 text-green-700 hover:bg-green-50">
+              <a href="/schemes">View All Schemes</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b dark:from-slate-950 dark:to-slate-900 px-3 py-4 sm:px-4 sm:py-6 md:p-8">

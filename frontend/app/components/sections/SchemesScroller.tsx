@@ -23,7 +23,7 @@ export default function SchemesScroller() {
           {schemes.map((scheme) => (
             <Link
               key={scheme.id}
-              href={`/schemes#${scheme.id}`}
+              href={`/schemes?id=${scheme.id}`}
               className="inline-flex items-center gap-3 text-gray-700 hover:text-green-600 transition-colors shrink-0"
             >
               <CircleDot className="w-4 h-4 text-green-600" />
@@ -39,7 +39,7 @@ export default function SchemesScroller() {
           {schemes.map((scheme) => (
             <Link
               key={`${scheme.id}-dup`}
-              href={`/schemes#${scheme.id}`}
+              href={`/schemes?id=${scheme.id}`}
               className="inline-flex items-center gap-3 text-gray-700 hover:text-green-600 transition-colors shrink-0"
             >
               <CircleDot className="w-4 h-4 text-green-600" />
