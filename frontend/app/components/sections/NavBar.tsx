@@ -65,7 +65,7 @@ export default function Navbar() {
                   href={item.href!}
                   className={`rounded px-3 py-2 font-semibold transition-all duration-200 hover:bg-green-600 hover:text-white hover:scale-105 ${
                     isActive(item.href) 
-                      ? "bg-green-500 text-white scale-105" 
+                      ? "bg-green-600 text-white scale-105" 
                       : "text-black"
                   }`}
                 >

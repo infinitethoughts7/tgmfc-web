@@ -271,8 +271,38 @@ export default function SchemesPage() {
   );
 }
 
+// Helper function to get portal URL
+function getPortalUrl(scheme: Scheme): string | null {
+  // First check if portalUrl exists
+  if (scheme.portalUrl) {
+    return scheme.portalUrl;
+  }
+  // Check if portal is a URL (starts with http or https)
+  if (scheme.portal && (scheme.portal.startsWith('http://') || scheme.portal.startsWith('https://'))) {
+    return scheme.portal;
+  }
+  return null;
+}
+
+// Helper function to get portal display name
+function getPortalDisplayName(scheme: Scheme): string {
+  // If portal is a URL, extract the domain name
+  if (scheme.portal.startsWith('http://') || scheme.portal.startsWith('https://')) {
+    try {
+      const url = new URL(scheme.portal);
+      return url.hostname;
+    } catch {
+      return scheme.portal;
+    }
+  }
+  return scheme.portal;
+}
+
 // Scheme Card Component
 function SchemeCard({ scheme }: { scheme: Scheme }) {
+  const portalUrl = getPortalUrl(scheme);
+  const portalDisplayName = getPortalDisplayName(scheme);
+
   const getCategoryColor = (category: string): string => {
     switch (category) {
       case 'Marriage Support':
@@ -398,14 +428,14 @@ function SchemeCard({ scheme }: { scheme: Scheme }) {
         <div className="pt-3 sm:pt-4 border-t border-green-100 dark:border-green-900/50">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 truncate">
-              <span className="font-medium">Portal:</span> {scheme.portal}
+              <span className="font-medium">Portal:</span> {portalDisplayName}
             </p>
-            {scheme.portalUrl && (
+            {portalUrl && (
               <Button
                 asChild
                 className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 w-full sm:w-auto text-sm sm:text-base"
               >
-                <a href={scheme.portalUrl} target="_blank" rel="noopener noreferrer">
+                <a href={portalUrl} target="_blank" rel="noopener noreferrer">
                   Apply Now
                 </a>
               </Button>

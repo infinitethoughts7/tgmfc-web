@@ -99,7 +99,7 @@
         "Bank statements",
         "Collateral documents (if applicable)"
       ],
-      "portal": "TGMFC",
+      "portal": "https://tgmreistelangana.cgg.gov.in/",
       "description": "Bank finances loan, Government provides subsidy. Typical subsidy: 15-25% of project cost. No upper limit on loan amount. Flexible repayment tenure.",
       "community": ["Muslims", "Sikhs", "Parsis", "Buddhists", "Jains"]
     },
@@ -166,7 +166,7 @@
         "Ration card",
         "Caste certificate"
       ],
-      "portal": "TGMFC Centers",
+      "portal": "https://tgmfc.com/",
       "description": "Self-employment and income generation. Distribution through TGMFC."
     },
     {
@@ -187,7 +187,7 @@
         "Income certificate",
         "Photograph"
       ],
-      "portal": "TGMFC",
+      "portal": "https://tgmfc.com/",
       "description": "Training programs include: General vocational courses, Urdu Computer Education, Driver Empowerment, Auto-rickshaw ownership support. Employment-focused curriculum with job placement assistance and skill certification.",
       "specialNotes": "No training fees. Potential stipend during training."
     },
@@ -207,7 +207,7 @@
         "Aadhar card",
         "Caste certificate"
       ],
-      "portal": "State Government Exam Portal",
+      "portal": "https://tgcmfc.in/coaching.php",
       "description": "Full academic year coaching. Civil service exam preparation. Classroom coaching format."
     },
     {
@@ -229,7 +229,7 @@
         "Previous school mark sheet",
         "Aadhar card"
       ],
-      "portal": "State Education Portal",
+      "portal": "https://tgmreistelangana.cgg.gov",
       "description": "Boarding schools with complete educational support. Meals, uniforms, and accommodation included. Quality education for minority students."
     },
     {
