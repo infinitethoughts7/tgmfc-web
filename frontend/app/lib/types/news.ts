@@ -28,7 +28,7 @@ export interface PressRelease {
   views: number;
 }
 
-export interface PressReleaseDetail extends PressRelease {
+export interface PressReleaseDetail extends Omit<PressRelease, 'category'> {
   category: {
     id: number;
     name: string;

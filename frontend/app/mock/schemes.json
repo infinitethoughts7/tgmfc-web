@@ -1,0 +1,274 @@
+{
+  "schemes": [
+    {
+      "id": "shaadi-mubarak",
+      "name": "Shaadi Mubarak (Marriage Assistance Scheme)",
+      "category": "Marriage Support",
+      "targetAudience": ["Minority girls (SC/ST/Muslims)", "Economically weaker sections"],
+      "benefit": "One-time financial assistance for marriages",
+      "benefitAmount": "₹1,00,116",
+      "eligibility": [
+        "Minimum 18 years at time of marriage",
+        "Annual family income ≤ ₹2,00,000",
+        "Permanent resident of Telangana",
+        "SC/ST/Muslim girls",
+        "Can be applied on or after marriage date"
+      ],
+      "documents": [
+        "Date of birth certificate",
+        "Caste certificate",
+        "Income certificate (not older than 6 months)",
+        "Aadhar card of bride and groom",
+        "Bank passbook first page",
+        "Wedding card",
+        "SSC hall ticket (optional)"
+      ],
+      "incomeLimit": "≤ ₹2,00,000 per annum",
+      "portal": "telanganaepass.cgg.gov.in",
+      "portalUrl": "https://telanganaepass.cgg.gov.in",
+      "description": "Direct credit to bride's bank account. Reduces financial burden on families. One-time lump sum assistance with no collateral needed.",
+      "specialNotes": "Launched on October 2, 2014"
+    },
+    {
+      "id": "indiramma-mahila",
+      "name": "Indiramma Minority Mahila Yojana",
+      "category": "Women Empowerment",
+      "targetAudience": ["Single women", "Divorced women", "Widows", "Minority communities"],
+      "benefit": "Loan with 100% subsidy for women (No repayment required)",
+      "benefitAmount": "₹50,000",
+      "eligibility": [
+        "Age: 21-55 years",
+        "Minimum 5th class pass",
+        "Should have ration card/food security card",
+        "Single women, divorced women, or widows",
+        "Minority community members"
+      ],
+      "documents": [
+        "Aadhar card",
+        "Food Security Card/Ration Card",
+        "Caste certificate",
+        "Income certificate (optional)",
+        "Divorce/Khula certificate or Tahsildar certificate for single women"
+      ],
+      "ageLimit": "21-55 years",
+      "portal": "tgobmms.cgg.gov.in",
+      "portalUrl": "https://tgobmms.cgg.gov.in",
+      "description": "Promotes financial independence and self-reliance. 100% subsidy means no repayment required.",
+      "specialNotes": "Launched on June 19, 2025. Application deadline: October 6, 2025"
+    },
+    {
+      "id": "revanth-anna",
+      "name": "Revanth Anna Ka Sahara Miskeeno Ke Liye Scheme",
+      "category": "Financial Assistance",
+      "targetAudience": ["Fakheer", "Dudekula", "Vulnerable Muslim communities"],
+      "benefit": "Financial assistance + Free moped (two-wheeler)",
+      "benefitAmount": "₹1,00,000 (cash) + Free moped",
+      "eligibility": [
+        "Valid driving license (mandatory)",
+        "Rural income limit: ≤ ₹1,50,000 per annum",
+        "Urban income limit: ≤ ₹2,00,000 per annum",
+        "Telangana permanent resident",
+        "Fakheer, Dudekula, or vulnerable Muslim community members"
+      ],
+      "documents": [
+        "Aadhar card",
+        "Food Security Card/Ration Card",
+        "Community certificate",
+        "Driving license"
+      ],
+      "incomeLimit": "Rural: ≤₹1,50,000 | Urban: ≤₹2,00,000",
+      "portal": "tgobmms.cgg.gov.in",
+      "portalUrl": "https://tgobmms.cgg.gov.in",
+      "description": "Designed for livelihood generation and mobility. Enables self-employment and business. Easy transportation for earning.",
+      "specialNotes": "Launched on September 19, 2025"
+    },
+    {
+      "id": "economic-support",
+      "name": "Economic Support Scheme (Bank Linked Subsidy)",
+      "category": "Financial Assistance",
+      "targetAudience": ["Business entrepreneurs", "MSME owners", "Economically backward minorities"],
+      "benefit": "Subsidy-linked bank loans for business setup",
+      "eligibility": [
+        "Individual entrepreneurs or small business owners",
+        "Business plan proposal required",
+        "Eligible activities: Industrial, Service, Agriculture, allied activities"
+      ],
+      "documents": [
+        "Business proposal/plan",
+        "Aadhar card",
+        "Bank statements",
+        "Collateral documents (if applicable)"
+      ],
+      "portal": "TGMFC",
+      "description": "Bank finances loan, Government provides subsidy. Typical subsidy: 15-25% of project cost. No upper limit on loan amount. Flexible repayment tenure.",
+      "community": ["Muslims", "Sikhs", "Parsis", "Buddhists", "Jains"]
+    },
+    {
+      "id": "pre-metric-scholarship",
+      "name": "Pre-Metric Scholarship",
+      "category": "Education",
+      "targetAudience": ["Students in classes 1-10", "Minority communities", "Economically weaker sections"],
+      "benefit": "Financial assistance for studies",
+      "eligibility": [
+        "Classes 1-10",
+        "Minority community student",
+        "Minimum academic performance required",
+        "Household income within specified limit",
+        "Telangana resident"
+      ],
+      "documents": [
+        "School admission certificate",
+        "Income certificate",
+        "Caste certificate",
+        "Aadhar card",
+        "Previous year mark sheet"
+      ],
+      "portal": "telanganaepass.cgg.gov.in",
+      "description": "Encourages education among minority communities. Merit-based assistance."
+    },
+    {
+      "id": "post-metric-scholarship",
+      "name": "Post-Metric Scholarship",
+      "category": "Education",
+      "targetAudience": ["Students 11-12 & higher education", "Minority communities"],
+      "benefit": "Financial assistance for higher studies",
+      "eligibility": [
+        "Classes 11-12 and beyond",
+        "Minority community student",
+        "Merit required",
+        "Family income within limit",
+        "Telangana resident"
+      ],
+      "documents": [
+        "College admission certificate",
+        "Income certificate",
+        "Caste certificate",
+        "Aadhar card",
+        "Mark sheet"
+      ],
+      "portal": "telanganaepass.cgg.gov.in",
+      "description": "Supports minority students pursuing higher education."
+    },
+    {
+      "id": "sewing-machine",
+      "name": "Indiramma Sewing Machine Distribution Scheme",
+      "category": "Women Empowerment",
+      "targetAudience": ["Women entrepreneurs", "Women 21-55 years"],
+      "benefit": "Free sewing machine distribution",
+      "eligibility": [
+        "Women aged 21-55 years",
+        "Minority communities",
+        "Interest in self-employment",
+        "Eligible for income generation"
+      ],
+      "documents": [
+        "Aadhar card",
+        "Ration card",
+        "Caste certificate"
+      ],
+      "portal": "TGMFC Centers",
+      "description": "Self-employment and income generation. Distribution through TGMFC."
+    },
+    {
+      "id": "vocational-training",
+      "name": "Vocational Training Schemes",
+      "category": "Skill Development",
+      "targetAudience": ["Youth 18-35 years", "Job seekers", "Skill development aspirants"],
+      "benefit": "FREE training programs with job placement assistance",
+      "eligibility": [
+        "Age: 18-35 years (varies by program)",
+        "Educational qualification varies by trade",
+        "Below income threshold",
+        "Interest in skill development"
+      ],
+      "documents": [
+        "Educational certificate",
+        "Aadhar card",
+        "Income certificate",
+        "Photograph"
+      ],
+      "portal": "TGMFC",
+      "description": "Training programs include: General vocational courses, Urdu Computer Education, Driver Empowerment, Auto-rickshaw ownership support. Employment-focused curriculum with job placement assistance and skill certification.",
+      "specialNotes": "No training fees. Potential stipend during training."
+    },
+    {
+      "id": "group-ii-coaching",
+      "name": "Group-II Coaching Scheme",
+      "category": "Education",
+      "targetAudience": ["Minority students", "Civil service aspirants"],
+      "benefit": "FREE coaching for Group-II exams",
+      "eligibility": [
+        "Minority community students",
+        "Group-II exam aspirants",
+        "Merit-based selection"
+      ],
+      "documents": [
+        "Educational qualification proof",
+        "Aadhar card",
+        "Caste certificate"
+      ],
+      "portal": "State Government Exam Portal",
+      "description": "Full academic year coaching. Civil service exam preparation. Classroom coaching format."
+    },
+    {
+      "id": "tmreis",
+      "name": "Telangana Minorities Residential Educational Institutions Society (TMREIS)",
+      "category": "Education",
+      "targetAudience": ["Minority community students", "Classes 6-12"],
+      "benefit": "FREE residential education, meals, uniforms",
+      "eligibility": [
+        "Minority community students",
+        "Classes 6-12 (varies by institution)",
+        "Below income threshold",
+        "Merit-based admission"
+      ],
+      "documents": [
+        "Birth certificate",
+        "Income certificate",
+        "Caste certificate",
+        "Previous school mark sheet",
+        "Aadhar card"
+      ],
+      "portal": "State Education Portal",
+      "description": "Boarding schools with complete educational support. Meals, uniforms, and accommodation included. Quality education for minority students."
+    },
+    {
+      "id": "christian-minorities",
+      "name": "Christian Minorities Finance Corporation Schemes",
+      "category": "Special Categories",
+      "targetAudience": ["Christian community", "Churches", "Educational institutions", "Social organizations"],
+      "benefit": "Bank-linked loans, entrepreneurship development, skill training",
+      "eligibility": [
+        "Christian community members",
+        "Church institutions",
+        "Educational institutions serving Christian community"
+      ],
+      "documents": [
+        "Aadhar card",
+        "Income certificate",
+        "Community certificate",
+        "Institutional documents (if applicable)"
+      ],
+      "portal": "tgcmfc.in",
+      "portalUrl": "https://tgcmfc.in",
+      "description": "Managed by Telangana State Christian Minorities Finance Corporation (TSCMFC). Support for business loans, educational institutions, schools, hospitals, orphanages, and churches."
+    }
+  ],
+  "categories": [
+    { "id": "all", "label": "All Schemes", "icon": "List" },
+    { "id": "marriage", "label": "Marriage Support", "icon": "Heart" },
+    { "id": "women", "label": "Women Empowerment", "icon": "Users" },
+    { "id": "financial", "label": "Financial Assistance", "icon": "IndianRupee" },
+    { "id": "education", "label": "Education", "icon": "BookOpen" },
+    { "id": "skill", "label": "Skill Development", "icon": "Wrench" },
+    { "id": "special", "label": "Special Categories", "icon": "Award" }
+  ],
+  "categoryMapping": {
+    "Marriage Support": "marriage",
+    "Women Empowerment": "women",
+    "Financial Assistance": "financial",
+    "Education": "education",
+    "Skill Development": "skill",
+    "Special Categories": "special"
+  }
+}
