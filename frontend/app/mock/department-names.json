@@ -5,84 +5,96 @@
       "name": "TGMREIS",
       "slug": "tgmreis",
       "logos": "/logos/tgmries_logo.png",
-      "externalLink": "https://tgmreistelangana.cgg.gov.in"
+      "externalLink": "https://tgmreistelangana.cgg.gov.in",
+      "description": "Runs residential schools and junior colleges providing free, high-quality education and holistic development for minority students."
     },
     {
       "id": 2,
       "name": "Telangana Minority Finance Corporation",
       "slug": "minority-finance-corporation",
       "logos": "/logos/mfc.png",
-      "externalLink": "https://tgmfc.com/"
+      "externalLink": "https://tgmfc.com/",
+      "description": "Provides financial assistance, subsidies, loans, and skill development support to improve economic opportunities for minorities."
     },
     {
       "id": 3,
       "name": "Telangana State Waqf Board",
       "slug": "waqf-board",
       "logos": "/logos/waqf-board.png",
-      "externalLink": "https://waqf.telangana.gov.in/"
+      "externalLink": "https://waqf.telangana.gov.in/",
+      "description": "Administers and protects Waqf properties and institutions, ensuring proper management and service delivery."
     },
     {
       "id": 4,
       "name": "Christian Minority Finance Corporation",
       "slug": "christian-minority-finance-corporation",
       "logos": "/logos/telangana.png",
-      "externalLink": "https://tgcmfc.in/"
+      "externalLink": "https://tgcmfc.in/",
+      "description": "Implements welfare schemes and provides financial assistance to support the economic upliftment of Christian minorities."
     },
     {
       "id": 5,
       "name": "Survey Commissioner of Waqf",
       "slug": "survey-commissioner-waqf",
       "logos": "/logos/telangana.png",
-      "externalLink": null
+      "externalLink": null,
+      "description": "Conducts statutory surveys to identify, document, and record Waqf properties across the state."
     },
     {
       "id": 6,
       "name": "Waqf Tribunal",
       "slug": "waqf-tribunal",
       "logos": "/logos/telangana.png",
-      "externalLink": "https://waqf.telangana.gov.in/"
+      "externalLink": "https://waqf.telangana.gov.in/",
+      "description": "A judicial body that adjudicates disputes and legal matters related to Waqf properties and institutions."
     },
     {
       "id": 7,
       "name": "Telangana Haj Committee",
       "slug": "haj-committee",
       "logos": "/logos/telangana.png",
-      "externalLink": "https://telanganastatehajcommittee.com/"
+      "externalLink": "https://telanganastatehajcommittee.com/",
+      "description": "Provides guidance and logistical support for pilgrims from Telangana undertaking the Haj pilgrimage."
     },
     {
       "id": 8,
       "name": "Telangana Urdu Academy",
       "slug": "urdu-academy",
       "logos": "/logos/telangana.png",
-      "externalLink": "https://www.urduacademyts.com/"
+      "externalLink": "https://www.urduacademyts.com/",
+      "description": "Promotes the Urdu language, literature, and culture through educational, literary, and cultural initiatives."
     },
     {
       "id": 9,
       "name": "Minorities Study Circle",
       "slug": "minorities-study-circle",
       "logos": "/logos/telangana.png",
-      "externalLink": "https://tsstudycircle.co.in/"
+      "externalLink": "https://tsstudycircle.co.in/",
+      "description": "Offers free coaching and study resources for minority candidates preparing for competitive examinations."
     },
     {
       "id": 10,
       "name": "Centre for Education Development of Minorities",
       "slug": "cedm",
       "logos": "/logos/telangana.png",
-      "externalLink": "https://tscedm.com/"
+      "externalLink": "https://tscedm.com/",
+      "description": "Implements educational development programs and coaching initiatives to improve academic outcomes for minorities."
     },
     {
       "id": 11,
       "name": "Dairatul-Maarif-il-Osmania",
       "slug": "dairatul-maarif",
       "logos": "/logos/telangana.png",
-      "externalLink": null
+      "externalLink": null,
+      "description": "A renowned institution dedicated to the research, preservation, and publication of rare Arabic manuscripts."
     },
     {
       "id": 12,
       "name": "Telangana Minorities Commission",
       "slug": "minorities-commission",
       "logos": "/logos/telangana.png",
-      "externalLink": null
+      "externalLink": null,
+      "description": "Protects minority rights and examines complaints related to deprivation or violation of those rights."
     }
   ]
 }
