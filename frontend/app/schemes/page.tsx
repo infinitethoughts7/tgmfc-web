@@ -122,57 +122,57 @@ export default function SchemesPage() {
   }, [searchQuery, selectedCategory, incomeFilter, sortBy, schemes, categoryMapping]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b  dark:from-slate-950 dark:to-slate-900 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-b dark:from-slate-950 dark:to-slate-900 px-3 py-4 sm:px-4 sm:py-6 md:p-8">
       {/* Header */}
-      <div className="max-w-7xl mx-auto mb-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-2">
+      <div className="max-w-7xl mx-auto mb-6 md:mb-8">
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-2">
             Telangana Minority Welfare Schemes
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400">
+          <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 px-2">
             Comprehensive guide to government schemes for minority communities
           </p>
         </div>
 
         {/* Info Alert */}
-        <Alert className="mb-8 border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-900">
+        <Alert className="mb-6 md:mb-8 border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-900">
           <AlertCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
-          <AlertTitle className="text-green-900 dark:text-green-100">Apply Now!</AlertTitle>
-          <AlertDescription className="text-green-800 dark:text-green-200">
-            Visit the official government portals to apply for schemes. All applications are processed online through e-governance platforms.
+          <AlertTitle className="text-green-900 dark:text-green-100 text-sm sm:text-base">Apply Now!</AlertTitle>
+          <AlertDescription className="text-green-800 dark:text-green-200 text-xs sm:text-sm">
+            Visit the official government portals to apply for schemes. All applications are processed online.
           </AlertDescription>
         </Alert>
 
         {/* Search and Filter Section */}
-        <Card className="mb-8 border-green-100 dark:border-green-900/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400">
-              <Search className="w-5 h-5" />
+        <Card className="mb-6 md:mb-8 border-green-100 dark:border-green-900/50">
+          <CardHeader className="pb-3 sm:pb-4">
+            <CardTitle className="flex text-lg sm:text-xl md:text-2xl font-bold items-center gap-2 text-green-700 dark:text-green-400">
+              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               Find Your Scheme
             </CardTitle>
-            <CardDescription>Search and filter schemes that match your profile</CardDescription>
+            <CardDescription className="text-xs sm:text-sm">Search and filter schemes that match your profile</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3 sm:space-y-4 pt-0">
             {/* Search Bar */}
             <div className="relative">
-              <Search className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-slate-400" />
               <Input
-                placeholder="Search by scheme name, benefit, or target audience..."
+                placeholder="Search schemes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 border-green-200 focus:border-green-500 focus:ring-green-500"
+                className="pl-9 sm:pl-10 text-sm sm:text-base border-green-200 focus:border-green-500 focus:ring-green-500"
               />
             </div>
 
             {/* Filters Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
               {/* Category Filter */}
               <div>
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">
+                <label className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:mb-2 block">
                   Category
                 </label>
                 <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="border-green-200 focus:ring-green-500">
+                  <SelectTrigger className="border-green-200 focus:ring-green-500 text-sm sm:text-base">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -190,11 +190,11 @@ export default function SchemesPage() {
 
               {/* Income Filter */}
               <div>
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">
+                <label className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:mb-2 block">
                   Income Level
                 </label>
                 <Select value={incomeFilter} onValueChange={setIncomeFilter}>
-                  <SelectTrigger className="border-green-200 focus:ring-green-500">
+                  <SelectTrigger className="border-green-200 focus:ring-green-500 text-sm sm:text-base">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -206,17 +206,17 @@ export default function SchemesPage() {
               </div>
 
               {/* Sort By */}
-              <div>
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">
+              <div className="sm:col-span-2 md:col-span-1">
+                <label className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:mb-2 block">
                   Sort By
                 </label>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="border-green-200 focus:ring-green-500">
+                  <SelectTrigger className="border-green-200 focus:ring-green-500 text-sm sm:text-base">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="name">Scheme Name</SelectItem>
-                    <SelectItem value="benefit">Benefit Amount (High to Low)</SelectItem>
+                    <SelectItem value="benefit">Benefit Amount</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -226,8 +226,8 @@ export default function SchemesPage() {
       </div>
 
       {/* Results Count */}
-      <div className="max-w-7xl mx-auto mb-4">
-        <p className="text-sm text-slate-600 dark:text-slate-400">
+      <div className="max-w-7xl mx-auto mb-4 sm:mb-6">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
           Showing <span className="font-semibold text-green-700 dark:text-green-400">{filteredSchemes.length}</span> of{' '}
           <span className="font-semibold text-green-700 dark:text-green-400">{schemes.length}</span> schemes
         </p>
@@ -236,7 +236,7 @@ export default function SchemesPage() {
       {/* Schemes Grid */}
       <div className="max-w-7xl mx-auto">
         {filteredSchemes.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+          <div className="grid gap-4 sm:gap-6">
             {filteredSchemes.map((scheme) => (
               <SchemeCard key={scheme.id} scheme={scheme} />
             ))}
@@ -251,19 +251,19 @@ export default function SchemesPage() {
       </div>
 
       {/* Footer Info */}
-      <div className="max-w-7xl mx-auto mt-12 border-t border-green-200 dark:border-green-900 pt-8">
-        <div className="grid md:grid-cols-3 gap-8 text-center">
+      <div className="max-w-7xl mx-auto mt-8 sm:mt-12 border-t border-green-200 dark:border-green-900 pt-6 sm:pt-8">
+        <div className="grid grid-cols-3 gap-4 sm:gap-8 text-center">
           <div>
-            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">{schemes.length}+</div>
-            <p className="text-slate-600 dark:text-slate-400">Active Schemes</p>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">{schemes.length}+</div>
+            <p className="text-xs sm:text-sm md:text-lg text-slate-600 dark:text-slate-400">Active Schemes</p>
           </div>
           <div>
-            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">₹50,000+</div>
-            <p className="text-slate-600 dark:text-slate-400">Average Benefit</p>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">₹50K+</div>
+            <p className="text-xs sm:text-sm md:text-lg text-slate-600 dark:text-slate-400">Avg Benefit</p>
           </div>
           <div>
-            <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">5</div>
-            <p className="text-slate-600 dark:text-slate-400">Minority Communities</p>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">5</div>
+            <p className="text-xs sm:text-sm md:text-lg text-slate-600 dark:text-slate-400">Communities</p>
           </div>
         </div>
       </div>
@@ -294,15 +294,15 @@ function SchemeCard({ scheme }: { scheme: Scheme }) {
 
   return (
     <Card className="hover:shadow-lg transition-shadow border-green-100 dark:border-green-900/50 hover:border-green-300 dark:hover:border-green-700">
-      <CardHeader>
-        <div className="flex items-start justify-between gap-4">
+      <CardHeader className="p-4 sm:p-6">
+        <div className="flex items-start justify-between gap-2 sm:gap-4">
           <div className="flex-1">
-            <CardTitle className="text-xl mb-2 text-slate-900 dark:text-white">{scheme.name}</CardTitle>
-            <div className="flex flex-wrap gap-2">
-              <Badge className={getCategoryColor(scheme.category)}>{scheme.category}</Badge>
+            <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 text-slate-900 dark:text-white leading-tight">{scheme.name}</CardTitle>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <Badge className={`text-xs sm:text-sm ${getCategoryColor(scheme.category)}`}>{scheme.category}</Badge>
               {scheme.benefitAmount && (
-                <Badge variant="outline" className="bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 border-green-300 dark:border-green-700">
-                  <IndianRupee className="w-3 h-3 mr-1" />
+                <Badge variant="outline" className="text-xs sm:text-sm bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 border-green-300 dark:border-green-700">
+                  <IndianRupee className="w-3 h-3 mr-0.5 sm:mr-1" />
                   {scheme.benefitAmount}
                 </Badge>
               )}
@@ -311,24 +311,24 @@ function SchemeCard({ scheme }: { scheme: Scheme }) {
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6 pt-0 sm:pt-0">
         {/* Description */}
-        <p className="text-slate-700 dark:text-slate-300">{scheme.description}</p>
+        <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">{scheme.description}</p>
 
         {/* Key Details */}
         <Accordion type="single" collapsible className="w-full">
           {/* Eligibility */}
           <AccordionItem value="eligibility" className="border-green-100 dark:border-green-900/50">
-            <AccordionTrigger className="text-sm font-semibold hover:text-green-600 dark:hover:text-green-400">
+            <AccordionTrigger className="text-sm sm:text-base font-semibold hover:text-green-600 dark:hover:text-green-400 py-3 sm:py-4">
               <span className="flex items-center">
-                <CheckCircle2 className="w-4 h-4 mr-2 text-green-600 dark:text-green-400" />
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600 dark:text-green-400" />
                 Eligibility Criteria
               </span>
             </AccordionTrigger>
             <AccordionContent>
-              <ul className="space-y-2">
+              <ul className="space-y-2 sm:space-y-3">
                 {scheme.eligibility.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm">
+                  <li key={idx} className="flex items-start gap-2 text-sm sm:text-base">
                     <span className="text-green-600 dark:text-green-400 font-bold mt-0.5">✓</span>
                     <span className="text-slate-700 dark:text-slate-300">{item}</span>
                   </li>
@@ -339,16 +339,16 @@ function SchemeCard({ scheme }: { scheme: Scheme }) {
 
           {/* Required Documents */}
           <AccordionItem value="documents" className="border-green-100 dark:border-green-900/50">
-            <AccordionTrigger className="text-sm font-semibold hover:text-green-600 dark:hover:text-green-400">
+            <AccordionTrigger className="text-sm sm:text-base font-semibold hover:text-green-600 dark:hover:text-green-400 py-3 sm:py-4">
               <span className="flex items-center">
-                <FileText className="w-4 h-4 mr-2 text-green-600 dark:text-green-400" />
+                <FileText className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600 dark:text-green-400" />
                 Required Documents
               </span>
             </AccordionTrigger>
             <AccordionContent>
-              <ul className="space-y-2">
+              <ul className="space-y-2 sm:space-y-3">
                 {scheme.documents.map((doc, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm">
+                  <li key={idx} className="flex items-start gap-2 text-sm sm:text-base">
                     <span className="text-green-600 dark:text-green-400">•</span>
                     <span className="text-slate-700 dark:text-slate-300">{doc}</span>
                   </li>
@@ -359,35 +359,35 @@ function SchemeCard({ scheme }: { scheme: Scheme }) {
 
           {/* Additional Info */}
           <AccordionItem value="info" className="border-green-100 dark:border-green-900/50">
-            <AccordionTrigger className="text-sm font-semibold hover:text-green-600 dark:hover:text-green-400">
+            <AccordionTrigger className="text-sm sm:text-base font-semibold hover:text-green-600 dark:hover:text-green-400 py-3 sm:py-4">
               <span className="flex items-center">
-                <Users className="w-4 h-4 mr-2 text-green-600 dark:text-green-400" />
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600 dark:text-green-400" />
                 More Information
               </span>
             </AccordionTrigger>
-            <AccordionContent className="space-y-3">
+            <AccordionContent className="space-y-3 sm:space-y-4">
               {scheme.ageLimit && (
                 <div>
-                  <p className="font-medium text-green-700 dark:text-green-400 text-sm">Age Limit</p>
-                  <p className="text-slate-700 dark:text-slate-300 text-sm">{scheme.ageLimit}</p>
+                  <p className="font-medium text-green-700 dark:text-green-400 text-sm sm:text-base">Age Limit</p>
+                  <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base">{scheme.ageLimit}</p>
                 </div>
               )}
               {scheme.incomeLimit && (
                 <div>
-                  <p className="font-medium text-green-700 dark:text-green-400 text-sm">Income Limit</p>
-                  <p className="text-slate-700 dark:text-slate-300 text-sm">{scheme.incomeLimit}</p>
+                  <p className="font-medium text-green-700 dark:text-green-400 text-sm sm:text-base">Income Limit</p>
+                  <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base">{scheme.incomeLimit}</p>
                 </div>
               )}
               {scheme.community && (
                 <div>
-                  <p className="font-medium text-green-700 dark:text-green-400 text-sm">Target Communities</p>
-                  <p className="text-slate-700 dark:text-slate-300 text-sm">{scheme.community.join(', ')}</p>
+                  <p className="font-medium text-green-700 dark:text-green-400 text-sm sm:text-base">Target Communities</p>
+                  <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base">{scheme.community.join(', ')}</p>
                 </div>
               )}
               {scheme.specialNotes && (
                 <div>
-                  <p className="font-medium text-green-700 dark:text-green-400 text-sm">Special Notes</p>
-                  <p className="text-slate-700 dark:text-slate-300 text-sm">{scheme.specialNotes}</p>
+                  <p className="font-medium text-green-700 dark:text-green-400 text-sm sm:text-base">Special Notes</p>
+                  <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base">{scheme.specialNotes}</p>
                 </div>
               )}
             </AccordionContent>
@@ -395,16 +395,15 @@ function SchemeCard({ scheme }: { scheme: Scheme }) {
         </Accordion>
 
         {/* Application Button */}
-        <div className="pt-4 border-t border-green-100 dark:border-green-900/50">
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+        <div className="pt-3 sm:pt-4 border-t border-green-100 dark:border-green-900/50">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 truncate">
               <span className="font-medium">Portal:</span> {scheme.portal}
             </p>
             {scheme.portalUrl && (
               <Button
                 asChild
-                size="sm"
-                className="bg-green-600 hover:bg-green-700 text-white"
+                className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 w-full sm:w-auto text-sm sm:text-base"
               >
                 <a href={scheme.portalUrl} target="_blank" rel="noopener noreferrer">
                   Apply Now
