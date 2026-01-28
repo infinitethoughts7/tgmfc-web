@@ -108,7 +108,7 @@ export default function Navbar() {
                             className="block px-4 py-3 text-sm font-medium text-black hover:bg-green-100 hover:text-green-800"
                             onClick={() => setOpenDropdown(null)}
                           >
-                            {child.label} <span className="text-xs">→</span>
+                            {child.label}
                           </a>
                         ) : (
                           <Link
@@ -220,7 +220,7 @@ export default function Navbar() {
                               className="block rounded px-2 py-1 text-sm text-green-700 hover:bg-green-100 hover:text-green-900"
                               onClick={() => setMobileOpen(false)}
                             >
-                              {child.label} <span className="text-xs text-green-500">→</span>
+                              {child.label}
                             </a>
                           ) : (
                             <Link
