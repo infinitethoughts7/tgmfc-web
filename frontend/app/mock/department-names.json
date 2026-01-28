@@ -52,7 +52,7 @@
       "id": 7,
       "name": "Telangana Haj Committee",
       "slug": "haj-committee",
-      "logos": "/logos/telangana.png",
+      "logos": "/logos/haz_commite.png",
       "externalLink": "https://telanganastatehajcommittee.com/",
       "description": "Provides guidance and logistical support for pilgrims from Telangana undertaking the Haj pilgrimage."
     },
@@ -68,7 +68,7 @@
       "id": 9,
       "name": "Minorities Study Circle",
       "slug": "minorities-study-circle",
-      "logos": "/logos/telangana.png",
+      "logos": "/logos/study_circle.png",
       "externalLink": "https://tsstudycircle.co.in/",
       "description": "Offers free coaching and study resources for minority candidates preparing for competitive examinations."
     },
@@ -76,7 +76,7 @@
       "id": 10,
       "name": "Centre for Education Development of Minorities",
       "slug": "cedm",
-      "logos": "/logos/telangana.png",
+      "logos": "/logos/education_minority.png",
       "externalLink": "https://tscedm.com/",
       "description": "Implements educational development programs and coaching initiatives to improve academic outcomes for minorities."
     },
