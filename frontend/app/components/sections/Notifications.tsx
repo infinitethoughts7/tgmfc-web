@@ -53,7 +53,7 @@ export default function Notifications() {
   }, [items]);
 
   return (
-    <div className="w-full rounded-lg bg-white h-full flex flex-col overflow-hidden shadow-lg">
+    <div className="w-full rounded-lg bg-green-50 h-full flex flex-col overflow-hidden shadow-sm">
       {/* Header */}
       <div className="bg-green-600 px-4 py-2.5 font-semibold text-white shrink-0 rounded-t-lg">
         Notifications
