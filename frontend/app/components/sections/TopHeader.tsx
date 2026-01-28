@@ -37,31 +37,35 @@ export default function TopHeader() {
       {/* Accessibility Bar */}
       <div className="w-full bg-gray-900 text-white">
         <div className="mx-auto max-w-7xl px-4 py-1.5 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={decreaseFontSize}
-              className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
-              aria-label="Decrease font size"
-              title="Decrease font size"
-            >
-              A-
-            </button>
-            <button
-              onClick={resetFontSize}
-              className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
-              aria-label="Reset font size"
-              title="Reset font size"
-            >
-              A
-            </button>
-            <button
-              onClick={increaseFontSize}
-              className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
-              aria-label="Increase font size"
-              title="Increase font size"
-            >
-              A+
-            </button>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={decreaseFontSize}
+                className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
+                aria-label="Decrease font size"
+                title="Decrease font size"
+              >
+                A-
+              </button>
+              <button
+                onClick={resetFontSize}
+                className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
+                aria-label="Reset font size"
+                title="Reset font size"
+              >
+                A
+              </button>
+              <button
+                onClick={increaseFontSize}
+                className="px-2 py-1 text-xs font-bold bg-fuchsia-700 hover:bg-fuchsia-800 rounded"
+                aria-label="Increase font size"
+                title="Increase font size"
+              >
+                A+
+              </button>
+            </div>
+            <div className="h-4 w-px bg-gray-600"></div>
+            <LanguageSelector />
           </div>
           <div className="flex items-center gap-2">
             <a
@@ -125,7 +129,6 @@ export default function TopHeader() {
                 </div>
               </div>
             ))}
-            <LanguageSelector />
           </div>
         </div>
 
@@ -149,7 +152,6 @@ export default function TopHeader() {
                 تلنگانہ محکمہ اقلیتی بہبود
               </span>
             </div>
-            <LanguageSelector />
           </div>
 
           {/* Search Bar */}

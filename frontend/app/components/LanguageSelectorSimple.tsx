@@ -112,15 +112,15 @@ export default function LanguageSelectorSimple() {
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 transition-colors shadow-sm"
+          className="flex items-center gap-1.5 px-2 py-1 rounded bg-fuchsia-700 hover:bg-fuchsia-800 transition-colors"
           aria-label="Select language"
           type="button"
         >
-          <Globe className="h-5 w-5 text-green-700" />
-          <span className="hidden sm:inline text-sm font-medium text-gray-700" suppressHydrationWarning>
+          <Globe className="h-3.5 w-3.5 text-white" />
+          <span className="hidden sm:inline text-xs font-bold text-white" suppressHydrationWarning>
             {currentLangName}
           </span>
-          <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+          <ChevronDown className={`h-3 w-3 text-white transition-transform ${isOpen ? "rotate-180" : ""}`} />
         </button>
 
         {isOpen && (
