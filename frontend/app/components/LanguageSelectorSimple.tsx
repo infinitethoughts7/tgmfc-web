@@ -124,7 +124,7 @@ export default function LanguageSelectorSimple() {
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl   overflow-hidden border border-gray-200">
+          <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 z-100">
             <div className="py-1 max-h-80 overflow-y-auto">
               {languages.map((lang) => (
                 <button
