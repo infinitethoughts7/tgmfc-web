@@ -102,21 +102,6 @@ export default function Footer() {
                 <span className="text-sm">Minority-Affairs-Official</span>
               </a>
             </div>
-
-            {/* Language Selector */}
-            <div>
-              <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                <Globe className="w-4 h-4" />
-                Select Language
-              </h4>
-              <select className="w-full bg-white text-gray-800 rounded px-3 py-2 text-sm border-0 focus:ring-2 focus:ring-green-400">
-                <option value="en">English</option>
-                <option value="hi">हिंदी (Hindi)</option>
-                <option value="te">తెలుగు (Telugu)</option>
-                <option value="ur">اردو (Urdu)</option>
-                <option value="ta">தமிழ் (Tamil)</option>
-              </select>
-            </div>
           </div>
         </div>
       </div>
