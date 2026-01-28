@@ -63,12 +63,20 @@ export default function TopHeader() {
               A+
             </button>
           </div>
-          <a
-            href="#main-content"
-            className="text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 px-3 py-1 rounded"
-          >
-            Skip to main content
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href="#main-content"
+              className="text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 px-3 py-1 rounded"
+            >
+              Skip to main content
+            </a>
+            <a
+              href="/officer/login"
+              className="text-xs font-semibold bg-teal-600 hover:bg-teal-700 px-3 py-1 rounded"
+            >
+              Officer Login
+            </a>
+          </div>
         </div>
       </div>
 

@@ -86,7 +86,7 @@ export const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-  // { label: "File & Manage Grievance", href: "/grievance" },
+  { label: "File & Manage Grievance", href: "/grievance" },
   { label: "News & Press", href: "/news-and-press" },
   { label: "Schemes", href: "/schemes" },
   { label: "Photo Gallery", href: "/photo-gallery" },
