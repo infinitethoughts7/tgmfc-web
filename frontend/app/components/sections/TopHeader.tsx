@@ -74,12 +74,12 @@ export default function TopHeader() {
             >
               Skip to main content
             </a>
-            <a
+            {/* <a
               href="/officer/login"
               className="text-xs font-semibold bg-teal-600 hover:bg-teal-700 px-3 py-1 rounded"
             >
               Officer Login
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
