@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -63,6 +63,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function SchemesPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const schemeId = searchParams.get('id');
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -124,7 +125,7 @@ export default function SchemesPage() {
           <Button
             variant="outline"
             className="mb-6 border-green-300 text-green-700 hover:bg-green-50"
-            onClick={() => window.history.back()}
+            onClick={() => router.push('/schemes')}
           >
             ← Back to All Schemes
           </Button>
