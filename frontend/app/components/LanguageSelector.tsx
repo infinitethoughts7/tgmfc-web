@@ -49,20 +49,65 @@ const languages = [
   { code: "or", name: "Odia" },
 ];
 
-// Get current language from cookie
+// Get current language from localStorage (primary) or cookie (fallback)
 function getCurrentLanguage(): string {
-  if (typeof document === "undefined") return "en";
-  
+  if (typeof window === "undefined") return "en";
+
+  // Check localStorage first (more reliable for UI state)
+  const storedLang = localStorage.getItem("selectedLanguage");
+  if (storedLang) return storedLang;
+
+  // Fallback to cookie
   const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split("=");
     if (name === "googtrans" && value) {
-      // Cookie format: /en/hi or /auto/hi
       const match = value.match(/\/[^/]+\/([a-z]{2})/i);
       if (match) return match[1];
     }
   }
   return "en";
+}
+
+// Save language preference to localStorage
+function saveLanguagePreference(langCode: string) {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("selectedLanguage", langCode);
+  }
+}
+
+// Remove Google Translate UI elements from the DOM
+function hideGoogleTranslateUI() {
+  // Selectors for Google Translate UI elements
+  const selectors = [
+    ".goog-te-banner-frame",
+    ".goog-te-balloon-frame",
+    ".goog-te-menu-frame",
+    ".goog-te-spinner-pos",
+    "#goog-gt-tt",
+    ".goog-tooltip",
+    ".skiptranslate:not(#google_translate_element)",
+    "[class*='VIpgJd']",
+  ];
+
+  selectors.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((el) => {
+      if (el instanceof HTMLElement) {
+        el.style.display = "none";
+        el.style.visibility = "hidden";
+      }
+    });
+  });
+
+  // Also hide any iframes that Google injects at the top
+  document.querySelectorAll("iframe.skiptranslate").forEach((iframe) => {
+    if (iframe instanceof HTMLElement) {
+      iframe.style.display = "none";
+    }
+  });
+
+  // Reset body top position
+  document.body.style.top = "0px";
 }
 
 // Set translation cookie and reload
@@ -91,15 +136,37 @@ export default function LanguageSelector() {
   const mountedRef = useRef(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Sync language from cookie on client mount (avoids hydration mismatch)
+  // Sync language from localStorage on client mount
   useIsomorphicLayoutEffect(() => {
     if (!mountedRef.current) {
       mountedRef.current = true;
       const lang = getCurrentLanguage();
-      if (lang !== "en") {
-        setSelectedLang(lang);
-      }
+      setSelectedLang(lang);
     }
+  }, []);
+
+  // Continuously hide Google Translate UI elements
+  useEffect(() => {
+    // Hide immediately
+    hideGoogleTranslateUI();
+
+    // Set up interval to keep hiding (Google may re-inject elements)
+    const interval = setInterval(hideGoogleTranslateUI, 500);
+
+    // Also use MutationObserver to catch new elements
+    const observer = new MutationObserver(() => {
+      hideGoogleTranslateUI();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+    };
   }, []);
 
   // Load Google Translate script on mount
@@ -287,6 +354,9 @@ export default function LanguageSelector() {
     setSelectedLang(langCode);
     setIsOpen(false);
 
+    // Save to localStorage for UI state persistence
+    saveLanguagePreference(langCode);
+
     // Try using Google's select element first (instant translation)
     const googleSelect = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
     
@@ -329,7 +399,8 @@ export default function LanguageSelector() {
 
   return (
     <>
-      <div className="relative" ref={dropdownRef}>
+      {/* notranslate prevents Google from translating the language selector */}
+      <div className="relative notranslate" ref={dropdownRef} translate="no">
         <button
           onClick={() => setIsOpen(!isOpen)}
           disabled={isLoading}
