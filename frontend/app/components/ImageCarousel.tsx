@@ -9,6 +9,10 @@ const slides = [
     title: "Education for Every Child",
     description: "Launching the statewide admission drive for Minority Residential Schools to ensure quality education reaches every household.",
   },
+   {image: "/news-press/g3.jpeg",
+    title: "Listening to Every Voice",
+    description: "Engaging directly with elders to understand their concerns firsthand and ensure their grievances are addressed with care and urgency.",
+  },
   {
     image: "/news-press/p2.jpeg",
     title: "People-Centric Leadership",
