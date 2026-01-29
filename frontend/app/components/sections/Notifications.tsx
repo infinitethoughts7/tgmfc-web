@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Bell } from "lucide-react";
 import { getNotifications } from "../../lib/api/api";
 
 type Notification = {
@@ -55,7 +56,8 @@ export default function Notifications() {
   return (
     <div className="w-full rounded-lg bg-green-50 h-full flex flex-col overflow-hidden shadow-sm">
       {/* Header */}
-      <div className="bg-green-600 px-4 py-2.5 font-semibold text-white shrink-0 rounded-t-lg">
+      <div className="bg-green-600 px-4 py-2.5 font-semibold text-white shrink-0 rounded-t-lg flex items-center gap-2">
+        <Bell className="w-4 h-4" />
         Notifications
       </div>
 
