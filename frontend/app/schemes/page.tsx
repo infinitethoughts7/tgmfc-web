@@ -67,7 +67,6 @@ export default function SchemesPage() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [incomeFilter, setIncomeFilter] = useState('all');
   const [sortBy, setSortBy] = useState('name');
 
   const schemes: Scheme[] = schemesData.schemes;
@@ -99,18 +98,6 @@ export default function SchemesPage() {
       );
     }
 
-    // Income filter
-    if (incomeFilter !== 'all') {
-      filtered = filtered.filter(scheme => {
-        const incomeLimit = scheme.incomeLimit;
-        if (!incomeLimit) return true;
-
-        if (incomeFilter === 'low' && incomeLimit.includes('₹2,00,000')) return true;
-        if (incomeFilter === 'mid' && (incomeLimit.includes('₹1,50,000') || incomeLimit.includes('Rural'))) return true;
-        return false;
-      });
-    }
-
     // Sort
     if (sortBy === 'benefit') {
       filtered.sort((a, b) => {
@@ -126,7 +113,7 @@ export default function SchemesPage() {
     }
 
     return filtered;
-  }, [searchQuery, selectedCategory, incomeFilter, sortBy, schemes, categoryMapping]);
+  }, [searchQuery, selectedCategory, sortBy, schemes, categoryMapping]);
 
   // If a specific scheme is selected, show only that scheme
   if (selectedScheme) {
@@ -200,7 +187,7 @@ export default function SchemesPage() {
             </div>
 
             {/* Filters Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {/* Category Filter */}
               <div>
                 <label className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:mb-2 block">
@@ -223,25 +210,8 @@ export default function SchemesPage() {
                 </Select>
               </div>
 
-              {/* Income Filter */}
-              <div>
-                <label className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:mb-2 block">
-                  Income Level
-                </label>
-                <Select value={incomeFilter} onValueChange={setIncomeFilter}>
-                  <SelectTrigger className="border-green-200 focus:ring-green-500 text-sm sm:text-base">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Income Levels</SelectItem>
-                    <SelectItem value="low">₹1-2,00,000</SelectItem>
-                    <SelectItem value="mid">₹1-1,50,000</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
               {/* Sort By */}
-              <div className="sm:col-span-2 md:col-span-1">
+              <div>
                 <label className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:mb-2 block">
                   Sort By
                 </label>
@@ -293,7 +263,7 @@ export default function SchemesPage() {
             <p className="text-xs sm:text-sm md:text-lg text-slate-600 dark:text-slate-400">Active Schemes</p>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">₹50K+</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 dark:text-green-400 mb-1 sm:mb-2">₹70K+</div>
             <p className="text-xs sm:text-sm md:text-lg text-slate-600 dark:text-slate-400">Avg Benefit</p>
           </div>
           <div>
