@@ -303,7 +303,7 @@ function getPortalDisplayName(scheme: Scheme): string {
   return scheme.portal;
 }
 
-// Scheme Card Component
+// Scheme Card Component with improved UI and functionality
 function SchemeCard({ scheme }: { scheme: Scheme }) {
   const portalUrl = getPortalUrl(scheme);
   const portalDisplayName = getPortalDisplayName(scheme);
