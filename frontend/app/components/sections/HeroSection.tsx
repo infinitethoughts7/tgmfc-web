@@ -52,7 +52,7 @@ export default function HeroSection() {
         </div>
 
         {/* Desktop Layout - 3 Column Grid */}
-        <div className="hidden lg:grid lg:grid-cols-[220px_1fr_220px] gap-3 h-[500px]">
+        <div className="hidden lg:grid lg:grid-cols-[220px_1fr_220px] gap-3 h-[480px]">
           
           {/* Left Column - Minister */}
           {minister && (

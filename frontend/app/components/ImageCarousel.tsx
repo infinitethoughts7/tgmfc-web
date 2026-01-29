@@ -40,8 +40,8 @@ const slides = [
   },
   {
     image: "/news-press/p6.jpeg",
-    title: "Cultural Heritage & Harmony",
-    description: "Celebrating our rich traditions while fostering unity and brotherhood across all communities.",
+    title: "A Leader Who Delivers",
+    description: "Standing shoulder-to-shoulder with beneficiaries, the Hon'ble Minister translates policy into reality by personally ensuring welfare benefits reach the people.",
   },
 ];
 
