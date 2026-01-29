@@ -3,14 +3,42 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const images = [
-  "/news-press/p1.jpeg",
-  "/news-press/p2.jpeg",
-  "/news-press/p3.jpeg",
-  "/news-press/p4.jpeg",
-  "/news-press/p6.jpeg",
-  "/news-press/p9.jpeg",
-  "/news-press/p11.jpeg"
+const slides = [
+  {
+    image: "/news-press/p1.jpeg",
+    title: "Education for Every Child",
+    description: "Launching the statewide admission drive for Minority Residential Schools to ensure quality education reaches every household.",
+  },
+  {
+    image: "/news-press/p2.jpeg",
+    title: "People-Centric Leadership",
+    description: "Strengthening the bond with the community through continuous engagement and transparent governance.",
+  },
+  {
+    image: "/news-press/p3.jpeg",
+    title: "Inaugurating Development Projects",
+    description: "Unveiling new infrastructure and welfare initiatives designed to uplift the minority community.",
+  },
+  {
+    image: "/news-press/p4.jpeg",
+    title: "Women's Economic Empowerment",
+    description: "Distributing sewing machines to foster self-reliance, entrepreneurship, and financial independence among women.",
+  },
+  {
+    image: "/news-press/p11.jpeg",
+    title: "Empowering the Next Generation",
+    description: "Awarding scholarships and appointment orders to deserving youth, paving the way for a brighter professional future.",
+  },
+  {
+    image: "/news-press/p9.jpeg",
+    title: "Health & Wellness Initiatives",
+    description: "Ensuring accessible healthcare and medical support for the most vulnerable sections of society.",
+  },
+  {
+    image: "/news-press/p6.jpeg",
+    title: "Cultural Heritage & Harmony",
+    description: "Celebrating our rich traditions while fostering unity and brotherhood across all communities.",
+  },
 ];
 
 export default function ImageCarousel() {
@@ -18,16 +46,18 @@ export default function ImageCarousel() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
 
+  const currentSlide = slides[currentIndex];
+
   return (
     <div className="w-full h-full flex flex-col">
       <div className="relative flex-1 overflow-hidden rounded-lg shadow-lg">
-        {images.map((image, index) => (
+        {slides.map((slide, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -35,18 +65,28 @@ export default function ImageCarousel() {
             }`}
           >
             <Image
-              src={image}
-              alt={`Slide ${index + 1}`}
+              src={slide.image}
+              alt={slide.title}
               fill
               className="object-cover"
               priority={index === 0}
             />
           </div>
         ))}
-        
+
+        {/* Caption overlay - Stories style horizontal box */}
+        <div className="absolute bottom-6 left-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2">
+          <h4 className="text-green-400 font-bold text-sm lg:text-base">
+            {currentSlide.title}
+          </h4>
+          <p className="text-white text-xs mt-0.5 line-clamp-1">
+            {currentSlide.description}
+          </p>
+        </div>
+
         {/* Dots overlay at bottom */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2">
-          {images.map((_, index) => (
+        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+          {slides.map((_, index) => (
             <button
               key={index}
               className={`w-2.5 h-2.5 rounded-full transition-colors ${
